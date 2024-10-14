@@ -19,10 +19,14 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
 
   return dependencies;
 };
-const dependencies = getDependencies("./src/test");
 
+// CLI로 경로 받기
+const sourceDir = process.argv[2] || "./src/test";
+const rootModule = process.argv[3] || "src/test/moduleA.ts";
+
+const dependencies = getDependencies(sourceDir);
 export const tree = JSON.stringify(
-  buildTree(dependencies, "src/test/moduleA.ts"),
+  buildTree(dependencies, rootModule),
   null,
   2
 );
