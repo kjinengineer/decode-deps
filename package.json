@@ -6,9 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "start": "ts-node src/index.ts",
     "server": "npx tsx ./server/index.ts",
-    "test": "ts-node src/index.ts ./test src/moduleB.ts",
+    "test": "npx tsx server/dependencyTree.ts",
     "build": "tsc --outDir ./dist"
   },
   "devDependencies": {

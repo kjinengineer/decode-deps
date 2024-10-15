@@ -1,12 +1,59 @@
 import * as fs from "fs";
 import * as path from "path";
-import buildTree from "./buildTree";
-import extractImports from "./extractImports";
-import extractNodesAndLinks from "./extract";
+import { Link, MyNode, TreeNode } from "../types";
 
-// CLI로 경로 받기
-const sourceDir = process.argv[2] || "./test";
-const rootModule = process.argv[3] || "/test/moduleA.ts";
+const extractImports = (filePath: string) => {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
+  const imports: string[] = [];
+
+  let match;
+  while ((match = importRegex.exec(content)) !== null) {
+    let importPath = match[1];
+
+    if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
+      if (
+        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".ts"))
+      ) {
+        importPath += ".ts";
+      } else if (
+        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".js"))
+      ) {
+        importPath += ".js";
+      }
+    }
+
+    imports.push(path.join(path.dirname(filePath), importPath));
+  }
+
+  return imports;
+};
+
+const extractNodesAndLinks = (
+  tree: TreeNode
+): {
+  nodes: MyNode[];
+  links: Link[];
+} => {
+  const nodes: MyNode[] = [];
+  const links: Link[] = [];
+
+  function traverse(node: TreeNode) {
+    const newNode: MyNode = { id: node.name };
+    nodes.push(newNode);
+
+    if (node.children) {
+      node.children.forEach((child) => {
+        links.push({ source: node.name, target: child.name });
+        traverse(child);
+      });
+    }
+  }
+
+  traverse(tree);
+
+  return { nodes, links };
+};
 
 const getDependencies = (dir: string): { [key: string]: string[] } => {
   const files = fs.readdirSync(dir);
@@ -24,6 +71,25 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
 
   return dependencies;
 };
+
+const buildTree = (
+  deps: { [key: string]: string[] },
+  root: string
+): TreeNode => {
+  const node: TreeNode = { name: root, children: [] };
+
+  if (deps[root]) {
+    deps[root].forEach((child) => {
+      node.children.push(buildTree(deps, child));
+    });
+  }
+
+  return node;
+};
+
+// CLI로 경로 받기
+const sourceDir = process.argv[2] || "./test";
+const rootModule = process.argv[3] || "test/moduleA.ts";
 
 const dependencies = getDependencies(sourceDir);
 const dependencyTree = buildTree(dependencies, rootModule);

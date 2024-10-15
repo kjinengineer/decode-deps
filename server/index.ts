@@ -10,6 +10,10 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 app.get("/dependencies", (req, res) => {
   console.log("res", res);
   res.json(dependencyTree);
