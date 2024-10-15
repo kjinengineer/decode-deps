@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 
-export const extractImports = (filePath: string) => {
+const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
   const imports = [];
@@ -27,3 +27,5 @@ export const extractImports = (filePath: string) => {
 
   return imports;
 };
+
+export default extractImports;
