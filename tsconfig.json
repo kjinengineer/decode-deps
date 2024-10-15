@@ -3,7 +3,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES6",
-    "outDir": "dist",
+    "outDir": "./dist",
     "esModuleInterop": true
   }
 }
