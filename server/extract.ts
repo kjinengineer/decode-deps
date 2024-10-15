@@ -12,15 +12,18 @@ interface Link {
   target: string;
 }
 
-export default function extractNodesAndLinks(tree: TreeNode): {
+const extractNodesAndLinks = (
+  tree: TreeNode
+): {
   nodes: MyNode[];
   links: Link[];
-} {
+} => {
   const nodes: MyNode[] = [];
   const links: Link[] = [];
 
   function traverse(node: TreeNode) {
     const newNode: MyNode = { id: node.name };
+    nodes.push(newNode);
 
     if (node.children) {
       node.children.forEach((child) => {
@@ -33,4 +36,6 @@ export default function extractNodesAndLinks(tree: TreeNode): {
   traverse(tree);
 
   return { nodes, links };
-}
+};
+
+export default extractNodesAndLinks;

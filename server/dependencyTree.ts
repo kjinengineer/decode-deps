@@ -1,7 +1,11 @@
 import * as fs from "fs";
 import * as path from "path";
-import { buildTree } from "./buildTree.js";
+import buildTree from "./buildTree.js";
 import extractImports from "./extractImports.js";
+
+// CLI로 경로 받기
+const sourceDir = process.argv[2] || "./test";
+const rootModule = process.argv[3] || "/test/moduleA.ts";
 
 const getDependencies = (dir: string): { [key: string]: string[] } => {
   const files = fs.readdirSync(dir);
@@ -20,15 +24,7 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
   return dependencies;
 };
 
-// CLI로 경로 받기
-const sourceDir = process.argv[2] || "./test";
-const rootModule = process.argv[3] || "/test/moduleA.ts";
-
 const dependencies = getDependencies(sourceDir);
-const tree = buildTree(dependencies, rootModule);
-export default tree;
-// export const tree = JSON.stringify(
-//   buildTree(dependencies, rootModule),
-//   null,
-//   2
-// );
+const dependencyTree = buildTree(dependencies, rootModule);
+
+export default dependencyTree;

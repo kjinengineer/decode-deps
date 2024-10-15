@@ -3,7 +3,7 @@ interface TreeNode {
   children: TreeNode[];
 }
 
-export const buildTree = (
+const buildTree = (
   deps: { [key: string]: string[] },
   root: string
 ): TreeNode => {
@@ -15,3 +15,5 @@ export const buildTree = (
 
   return node;
 };
+
+export default buildTree;
