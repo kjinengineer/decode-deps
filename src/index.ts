@@ -1,6 +1,6 @@
 import * as d3 from "d3";
-import extractNodesAndLinks from "./visualization/extract.js";
-import tree from "./tree/tree.js";
+import extractNodesAndLinks from "../server/extract";
+import { tree } from "d3";
 
 const { nodes, links } = extractNodesAndLinks(tree);
 const svg = d3.select("svg");

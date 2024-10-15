@@ -21,8 +21,8 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
 };
 
 // CLI로 경로 받기
-const sourceDir = process.argv[2] || "./src/test";
-const rootModule = process.argv[3] || "src/test/moduleA.ts";
+const sourceDir = process.argv[2] || "./test";
+const rootModule = process.argv[3] || "/test/moduleA.ts";
 
 const dependencies = getDependencies(sourceDir);
 const tree = buildTree(dependencies, rootModule);
