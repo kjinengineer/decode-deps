@@ -1,7 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
-import buildTree from "./buildTree.js";
-import extractImports from "./extractImports.js";
+import buildTree from "./buildTree";
+import extractImports from "./extractImports";
+import extractNodesAndLinks from "./extract";
 
 // CLI로 경로 받기
 const sourceDir = process.argv[2] || "./test";
@@ -27,4 +28,4 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
 const dependencies = getDependencies(sourceDir);
 const dependencyTree = buildTree(dependencies, rootModule);
 
-export default dependencyTree;
+export default extractNodesAndLinks(dependencyTree);

@@ -3,6 +3,7 @@ import * as d3 from "d3";
 fetch("http://localhost:4000/dependencies")
   .then((response) => response.json())
   .then((data) => {
+    console.log("data", data);
     const svg = d3.select("svg");
 
     const { nodes, links } = data;

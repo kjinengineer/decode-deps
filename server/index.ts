@@ -3,14 +3,15 @@ import dependencyTree from "./dependencyTree";
 import cors from "cors";
 
 const corsOptions = {
-  origin: "http://localhost:5173", // 허용할 도메인
-  optionsSuccessStatus: 200, // 일부 브라우저에서 204 대신 200 응답을 반환
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200,
 };
 
 const app = express();
 app.use(cors(corsOptions));
 
 app.get("/dependencies", (req, res) => {
+  console.log("res", res);
   res.json(dependencyTree);
 });
 
