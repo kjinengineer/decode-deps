@@ -1,5 +1,5 @@
 {
-  "name": "view-module",
+  "name": "a-module",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -10,17 +10,22 @@
     "test": "npx tsx server/dependencyTree.ts",
     "build": "tsc --outDir ./dist"
   },
+  "bin": {
+    "cli": "./bin/index.js"
+  },
   "devDependencies": {
     "@types/d3": "^7.4.3",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.5",
-    "vite": "^5.4.9"
-  },
-  "dependencies": {
     "cors": "^2.8.5",
-    "d3": "^7.9.0",
     "express": "^4.21.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
+    "vite": "^5.4.9"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "open": "^10.1.0",
     "typescript": "^5.6.3"
   }
 }

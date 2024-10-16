@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { Link, MyNode, TreeNode } from "../types";
+// import { rootModule, sourceDir } from "../bin/analyze";
 
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
@@ -29,7 +30,7 @@ const extractImports = (filePath: string) => {
   return imports;
 };
 
-const extractNodesAndLinks = (
+export const extractNodesAndLinks = (
   tree: TreeNode
 ): {
   nodes: MyNode[];
@@ -55,7 +56,7 @@ const extractNodesAndLinks = (
   return { nodes, links };
 };
 
-const getDependencies = (dir: string): { [key: string]: string[] } => {
+export const getDependencies = (dir: string): { [key: string]: string[] } => {
   const files = fs.readdirSync(dir);
   const dependencies: { [key: string]: string[] } = {};
 
@@ -72,7 +73,7 @@ const getDependencies = (dir: string): { [key: string]: string[] } => {
   return dependencies;
 };
 
-const buildTree = (
+export const buildTree = (
   deps: { [key: string]: string[] },
   root: string
 ): TreeNode => {
@@ -91,7 +92,7 @@ const buildTree = (
 const sourceDir = process.argv[2] || "./test";
 const rootModule = process.argv[3] || "test/moduleA.ts";
 
-const dependencies = getDependencies(sourceDir);
-const dependencyTree = buildTree(dependencies, rootModule);
+// const dependencies = getDependencies(sourceDir);
+// const dependencyTree = buildTree(dependencies, rootModule);
 
-export default extractNodesAndLinks(dependencyTree);
+// export extractNodesAndLinks(dependencyTree);

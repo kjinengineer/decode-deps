@@ -1,5 +1,9 @@
 import express from "express";
-import dependencyTree from "./dependencyTree";
+import {
+  buildTree,
+  extractNodesAndLinks,
+  getDependencies,
+} from "./dependencyTree";
 import cors from "cors";
 
 const corsOptions = {
@@ -8,15 +12,21 @@ const corsOptions = {
 };
 
 const app = express();
+
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.get("/dependencies", (req, res) => {
-  console.log("res", res);
-  res.json(dependencyTree);
+app.get("/analyze", (req, res) => {
+  const sourceDir = req.query.sourceDir as string;
+  const rootModule = req.query.rootModule as string;
+
+  const dependencies = getDependencies(sourceDir);
+  const dependencyTree = buildTree(dependencies, rootModule);
+
+  res.json(extractNodesAndLinks(dependencyTree));
 });
 
 app.listen(4000, () => {
