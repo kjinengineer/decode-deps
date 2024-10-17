@@ -1,5 +1,5 @@
 {
-  "name": "a-module",
+  "name": "deptrack",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",

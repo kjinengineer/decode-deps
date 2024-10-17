@@ -86,11 +86,3 @@ export const buildTree = (
 
   return node;
 };
-
-// const sourceDir = process.argv[2] || "./test";
-// const rootModule = process.argv[3] || "test/moduleA.ts";
-
-// const dependencies = getDependencies(sourceDir);
-// const dependencyTree = buildTree(dependencies, rootModule);
-
-// export extractNodesAndLinks(dependencyTree);

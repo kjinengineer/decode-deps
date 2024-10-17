@@ -1,9 +1,5 @@
 import express from "express";
-import {
-  buildTree,
-  extractNodesAndLinks,
-  getDependencies,
-} from "./dependencyTree";
+import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
 import cors from "cors";
 import open from "open";
 
@@ -36,11 +32,12 @@ app.get("/track", (req, res) => {
         <script>
           window.onload = function() {
             const data = ${JSON.stringify(result)};
-            console.log('Analyzed Data:', data);
+            console.log(data);
           };
         </script>
       </head>
       <body>
+        <h1>hello world!</h1>
       </body>
     </html>
   `);
