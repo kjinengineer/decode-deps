@@ -5,30 +5,48 @@ import {
   getDependencies,
 } from "./dependencyTree";
 import cors from "cors";
-
-const corsOptions = {
-  origin: "http://localhost:5173",
-  optionsSuccessStatus: 200,
-};
+import open from "open";
 
 const app = express();
+const port = 4000;
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    optionsSuccessStatus: 200,
+  })
+);
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
-app.get("/analyze", (req, res) => {
-  const sourceDir = req.query.sourceDir as string;
-  const rootModule = req.query.rootModule as string;
+app.get("/track", (req, res) => {
+  const sourceDir = (req.query.sourceDir as string) || "./test";
+  const rootModule = (req.query.rootModule as string) || "test/moduleA.ts";
 
   const dependencies = getDependencies(sourceDir);
   const dependencyTree = buildTree(dependencies, rootModule);
 
-  res.json(extractNodesAndLinks(dependencyTree));
+  const result = extractNodesAndLinks(dependencyTree);
+
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Module Analysis</title>
+        <script>
+          window.onload = function() {
+            const data = ${JSON.stringify(result)};
+            console.log('Analyzed Data:', data);
+          };
+        </script>
+      </head>
+      <body>
+      </body>
+    </html>
+  `);
 });
 
-app.listen(4000, () => {
+app.listen(port, () => {
   console.log("Server is running on http://localhost:4000");
+  open(`http://localhost:${port}/track`);
 });

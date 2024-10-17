@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 import { Link, MyNode, TreeNode } from "../types";
-// import { rootModule, sourceDir } from "../bin/analyze";
 
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
@@ -88,9 +87,8 @@ export const buildTree = (
   return node;
 };
 
-// CLI로 경로 받기
-const sourceDir = process.argv[2] || "./test";
-const rootModule = process.argv[3] || "test/moduleA.ts";
+// const sourceDir = process.argv[2] || "./test";
+// const rootModule = process.argv[3] || "test/moduleA.ts";
 
 // const dependencies = getDependencies(sourceDir);
 // const dependencyTree = buildTree(dependencies, rootModule);
