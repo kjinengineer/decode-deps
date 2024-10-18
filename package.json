@@ -5,8 +5,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "back": "npx tsx ./server/index.ts",
+    "front": "vite",
+    "back": "npx tsx ./backend/index.ts",
+    "dev": "yarn back && yarn front",
     "test": "npx tsx server/dependencyTree.ts",
     "build": "tsc --outDir ./dist"
   },

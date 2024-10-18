@@ -3,8 +3,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES6",
-    "outDir": "server/dist",
+    "outDir": "backend/dist",
     "esModuleInterop": true
   },
-  "include": ["server/src/**/*", "bin/**/*"]
+  "include": ["backend/**/*", "bin/**/*", "frontend/**/*"]
 }

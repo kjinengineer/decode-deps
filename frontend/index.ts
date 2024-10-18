@@ -3,24 +3,25 @@
 // const sourceDir = "./test";
 // const rootModule = "test/moduleA.ts";
 
-async function checkResult() {
-  try {
-    let response = await fetch("http://localhost:4000/result");
-    let data = await response.json();
+console.log("hello front");
+// async function checkResult() {
+//   try {
+//     let response = await fetch("http://localhost:4000/result");
+//     let data = await response.json();
 
-    if (response.status === 202) {
-      console.log(data.message); // 분석 중인 경우
-      setTimeout(checkResult, 1000); // 1초 뒤에 다시 요청
-    } else if (response.status === 200) {
-      console.log("Analysis Result:", data); // 분석 완료된 결과
-      // 결과 시각화 작업
-    }
-  } catch (error) {
-    console.error("Error fetching result:", error);
-  }
-}
+//     if (response.status === 202) {
+//       console.log(data.message); // 분석 중인 경우
+//       setTimeout(checkResult, 1000); // 1초 뒤에 다시 요청
+//     } else if (response.status === 200) {
+//       console.log("Analysis Result:", data); // 분석 완료된 결과
+//       // 결과 시각화 작업
+//     }
+//   } catch (error) {
+//     console.error("Error fetching result:", error);
+//   }
+// }
 
-checkResult();
+// checkResult();
 
 // async function fetchTreeData() {
 // const response = await fetch(`http://localhost:4000/result`);
