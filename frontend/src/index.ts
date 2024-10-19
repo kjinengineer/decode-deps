@@ -1,17 +1,13 @@
 import * as d3 from "d3";
 
-console.log("hello front");
+const fetchData = async () => {
+  const response = await fetch(`http://localhost:4000/result`);
+  const data = await response.json();
+  console.log("data", data);
+};
 
-// const sourceDir = "./test";
-// const rootModule = "test/moduleA.ts";
+fetchData();
 
-// const fetchData = async () => {
-// const response = await fetch(`http://localhost:4000/track`);
-// const data = await response.json();
-// console.log("data", data);
-// };
-//
-// fetchData();
 // async function fetchTreeData() {
 //   const response = await fetch(`http://localhost:4000/result`);
 //   const data = await response.json();

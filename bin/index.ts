@@ -2,7 +2,7 @@
 import fetch from "node-fetch";
 
 const sourceDir = process.argv[2] || "./test";
-const rootModule = process.argv[3] || "test/moduleA.ts";
+const rootModule = process.argv[3] || "test/App.ts";
 
 if (sourceDir && rootModule) {
   const url = `http://localhost:4000/track?sourceDir=${sourceDir}&rootModule=${rootModule}`;

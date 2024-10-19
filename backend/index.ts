@@ -38,6 +38,7 @@ import express from "express";
 import cors from "cors";
 import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
 import open from "open";
+import fs from "fs";
 
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
@@ -72,28 +73,23 @@ app.get("/track", (req, res) => {
   const dependencyTree = buildTree(dependencies, rootModule);
   resultData = extractNodesAndLinks(dependencyTree);
 
+  fs.writeFileSync(
+    path.join(__dirname, "analysisResult.json"),
+    JSON.stringify(resultData, null, 2)
+  );
+
   res.json(resultData);
 });
 
 app.get("/result", (req, res) => {
-  res.send(`<!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Module Analysis</title>
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-      </head>
-      <body>
-        <h1>Dependency Analysis Result</h1>
-        <div id="chart"></div>
-        <script>
-          const data = ${JSON.stringify(resultData)};
-          console.log(data)
-        </script>
-      </body>
-    </html>
-  `);
+  const filePath = path.join(__dirname, "analysisResult.json");
+
+  if (fs.existsSync(filePath)) {
+    const data = fs.readFileSync(filePath, "utf-8");
+    res.json(JSON.parse(data));
+  } else {
+    res.status(404).json({ error: "No data available" });
+  }
 });
 
 app.listen(port, () => {
