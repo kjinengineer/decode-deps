@@ -9,10 +9,10 @@
     "back": "npx tsx ./backend/index.ts",
     "dev": "yarn back && yarn front",
     "test": "npx tsx server/dependencyTree.ts",
-    "build": "tsc --outDir ./dist"
+    "build": "tsc --outDir ./dist && cp -R frontend/public dist/frontend/public"
   },
   "bin": {
-    "cli": "./bin/index.js"
+    "cli": "./dist/bin/index.js"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",

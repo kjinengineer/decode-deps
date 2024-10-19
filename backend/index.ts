@@ -1,20 +1,52 @@
+// import express from "express";
+// import cors from "cors";
+// import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
+
+// const app = express();
+// const port = 4000;
+
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     optionsSuccessStatus: 200,
+//   })
+// );
+
+// app.get("/", (req, res) => {
+//   res.send("hello world");
+// });
+
+// app.get("/track", (req, res) => {
+//   const sourceDir = (req.query.sourceDir as string) || null;
+//   const rootModule = (req.query.rootModule as string) || null;
+
+//   if (!sourceDir || !rootModule) {
+//     res.send("no data");
+//   }
+//   const dependencies = getDependencies(sourceDir);
+//   const dependencyTree = buildTree(dependencies, rootModule);
+//   const result = extractNodesAndLinks(dependencyTree);
+
+//   res.json(result);
+// });
+
+// app.listen(port, () => {
+//   console.log("Server is running on http://localhost:4000");
+// });
+
 import express from "express";
 import cors from "cors";
 import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
+import open from "open";
 
-import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path, { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 const port = 4000;
-
-let analysisResult: any = null;
-let isAnalyzing = false;
 
 app.use(
   cors({
@@ -23,44 +55,47 @@ app.use(
   })
 );
 
-// app.get("/track", (req, res) => {
-//   const sourceDir = (req.query.sourceDir as string) || "./test";
-//   const rootModule = (req.query.rootModule as string) || "test/moduleA.ts";
+let resultData: any = null;
 
-//   new Promise((resolve, reject) => {
-//     try {
-//       const dependencies = getDependencies(sourceDir);
-//       const dependencyTree = buildTree(dependencies, rootModule);
-//       const result = extractNodesAndLinks(dependencyTree);
-//       resolve(result);
-//     } catch (error) {
-//       reject(error);
-//     }
-//   })
-//     .then((result) => {
-//       analysisResult = result;
-//       isAnalyzing = false;
-//       console.log(result);
-//       res.json(result);
-//     })
-//     .catch((error) => {
-//       isAnalyzing = false;
-//       res.status(500).json({ error: "Analysis failed" });
-//     });
-// });
+app.use(express.static(path.join(__dirname, "../dist/frontend/public")));
+app.use(express.static(path.join(__dirname, "../dist/frontend/src")));
 
-// app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/frontend/public/index.html"));
+});
 
-// app.get("/result", (req, res) => {
-//   const filePath = path.join(__dirname, "public", "index.html");
-//   fs.readFile(filePath, "utf-8", (err, data) => {
-//     if (err) {
-//       return res.status(500).send("Error loading HTML file");
-//     }
-//     res.send(data);
-//   });
-// });
+app.get("/track", (req, res) => {
+  const sourceDir = (req.query.sourceDir as string) || null;
+  const rootModule = (req.query.rootModule as string) || null;
+
+  const dependencies = getDependencies(sourceDir);
+  const dependencyTree = buildTree(dependencies, rootModule);
+  resultData = extractNodesAndLinks(dependencyTree);
+
+  res.json(resultData);
+});
+
+app.get("/result", (req, res) => {
+  res.send(`<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Module Analysis</title>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+      </head>
+      <body>
+        <h1>Dependency Analysis Result</h1>
+        <div id="chart"></div>
+        <script>
+          const data = ${JSON.stringify(resultData)};
+          console.log(data)
+        </script>
+      </body>
+    </html>
+  `);
+});
 
 app.listen(port, () => {
-  console.log("Server is running on http://localhost:4000");
+  console.log(`Server running at http://localhost:${port}`);
 });
