@@ -1,12 +1,12 @@
-import * as d3 from "d3";
+// // import * as d3 from "d3";
 
-const fetchData = async () => {
-  const response = await fetch(`http://localhost:4000/result`);
-  const data = await response.json();
-  console.log("data", data);
-};
+// // const fetchData = async () => {
+// //   const response = await fetch(`http://localhost:4000/result`);
+// //   const data = await response.json();
+// //   console.log("data", data);
+// // };
 
-fetchData();
+// // fetchData();
 
 // async function fetchTreeData() {
 //   const response = await fetch(`http://localhost:4000/result`);
