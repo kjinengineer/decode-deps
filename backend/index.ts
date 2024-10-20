@@ -19,11 +19,10 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "../dist/frontend/public")));
-app.use(express.static(path.join(__dirname, "../dist/frontend/src")));
+app.use(express.static(path.join(__dirname, "../dist/frontend")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/frontend/public/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/frontend/index.html"));
 });
 
 app.get("/track", (req, res) => {

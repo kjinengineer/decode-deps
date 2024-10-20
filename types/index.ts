@@ -1,6 +1,7 @@
 export interface TreeNode {
   name: string;
   children: TreeNode[];
+  size: number;
 }
 
 export interface MyNode {

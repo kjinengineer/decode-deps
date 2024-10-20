@@ -8,7 +8,7 @@
     "front": "vite",
     "back": "npx tsx ./backend/index.ts",
     "test": "npx track ./test test/App.ts",
-    "build": "tsc --outDir ./dist && cp -R frontend/public dist/frontend/public"
+    "build": "tsc --outDir ./dist && cp -R frontend dist/frontend"
   },
   "bin": {
     "track": "./dist/bin/index.js"

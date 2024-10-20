@@ -29,6 +29,11 @@ const extractImports = (filePath: string) => {
   return imports;
 };
 
+const getFileSize = (filePath: string): number => {
+  const stats = fs.statSync(filePath);
+  return stats.size;
+};
+
 export const extractNodesAndLinks = (
   tree: TreeNode
 ): {
@@ -76,7 +81,11 @@ export const buildTree = (
   deps: { [key: string]: string[] },
   root: string
 ): TreeNode => {
-  const node: TreeNode = { name: root, children: [] };
+  const node: TreeNode = {
+    name: root,
+    children: [],
+    size: getFileSize(root),
+  };
 
   if (deps[root]) {
     deps[root].forEach((child) => {
