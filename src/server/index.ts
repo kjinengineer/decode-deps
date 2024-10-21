@@ -6,8 +6,11 @@ import path, { dirname } from "path";
 
 import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+const _filename = fileURLToPath(
+  require("url").pathToFileURL(__filename).toString()
+);
+const __dirname = dirname(_filename);
 
 const app = express();
 const port = 4000;
@@ -19,7 +22,7 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

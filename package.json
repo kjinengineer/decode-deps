@@ -1,11 +1,22 @@
 {
   "name": "dep-track",
   "version": "1.0.0",
-  "type": "module",
-  "license": "MIT",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    }
+  },
   "scripts": {
     "dev": "npx tsx ./src/index.ts",
-    "build": "tsc --outDir ./dist && cp -R src/public dist/public"
+    "server:cjs": "node ./cjs/index.js",
+    "server:esm": "node ./esm/index.js",
+    "build:orig": "tsc --outDir ./dist && cp -R src/public dist/public",
+    "build": "npm run build:cjs & npm run build:esm",
+    "build:cjs": "tsc --p ./cjs/tsconfig.json",
+    "build:esm": "tsc --p ./esm/tsconfig.json"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
@@ -19,5 +30,6 @@
   "dependencies": {
     "node-fetch": "^3.3.2",
     "open": "^10.1.0"
-  }
+  },
+  "license": "MIT"
 }
