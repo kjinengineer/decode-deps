@@ -1,5 +1,5 @@
 {
-  "name": "dep-track",
+  "name": "view-module",
   "version": "1.0.0",
   "main": "cjs/index.js",
   "module": "esm/index.js",
@@ -13,10 +13,10 @@
     "dev": "npx tsx ./src/index.ts",
     "server:cjs": "node ./cjs/index.js",
     "server:esm": "node ./esm/index.js",
-    "build:orig": "tsc --outDir ./dist && cp -R src/public dist/public",
     "build": "npm run build:cjs & npm run build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
-    "build:esm": "tsc --p ./esm/tsconfig.json"
+    "build:esm": "tsc --p ./esm/tsconfig.json",
+    "build:orig": "tsc --outDir ./dist && cp -R src/public dist/public"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
