@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { Link, MyNode, TreeNode } from "../types";
+import { Link, MyNode, TreeNode } from "./types";
 
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
