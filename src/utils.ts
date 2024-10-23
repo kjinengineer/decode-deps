@@ -50,7 +50,7 @@ export const extractNodesAndLinks = (
 
   const visited = [];
 
-  function traverse(node: TreeNode) {
+  function getNodes(node: TreeNode) {
     const newNode: MyNode = {
       id: node.id,
       size: node.size,
@@ -63,13 +63,13 @@ export const extractNodesAndLinks = (
       if (node.children) {
         node.children.forEach((child) => {
           links.push({ source: node.id, target: child.id });
-          traverse(child);
+          getNodes(child);
         });
       }
     }
   }
 
-  traverse(tree);
+  getNodes(tree);
 
   return { nodes, links };
 };

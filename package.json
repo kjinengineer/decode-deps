@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "dev": "npx tsx ./src/index.ts",
+    "dev": "npx tsx ./src/routes.ts",
     "build": "yarn build:cjs & yarn build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
     "build:esm": "tsc --p ./esm/tsconfig.json",
