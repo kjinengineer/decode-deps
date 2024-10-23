@@ -26,6 +26,7 @@ const extractImports = (filePath: string) => {
     imports.push(path.join(path.dirname(filePath), importPath));
   }
 
+  console.log(imports);
   return imports;
 };
 
