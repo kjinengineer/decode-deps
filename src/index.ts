@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
@@ -14,13 +13,6 @@ const __dirname = dirname(_filename);
 
 const app = express();
 const port = 4000;
-
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200,
-  })
-);
 
 app.use(express.static(path.join(__dirname, "../public")));
 

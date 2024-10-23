@@ -12,13 +12,10 @@
   },
   "scripts": {
     "dev": "npx tsx ./src/index.ts",
-    "server:cjs": "node ./cjs/index.js",
-    "server:esm": "node ./esm/index.js",
     "build": "yarn build:cjs & yarn build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
     "build:esm": "tsc --p ./esm/tsconfig.json",
-    "build:orig": "tsc --outDir ./dist && cp -R public dist/public",
-    "test": "npx tsx ./src/utils"
+    "build:orig": "tsc --outDir ./dist && cp -R public dist/public"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
