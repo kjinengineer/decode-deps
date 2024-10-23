@@ -7,7 +7,8 @@ const extractImports = (filePath: string) => {
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
   const imports: string[] = [];
 
-  let match;
+  let match: RegExpExecArray;
+
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
 
@@ -47,15 +48,24 @@ export const extractNodesAndLinks = (
   const nodes: MyNode[] = [];
   const links: Link[] = [];
 
-  function traverse(node: TreeNode) {
-    const newNode: MyNode = { id: node.name, size: node.size };
-    nodes.push(newNode);
+  const visited = [];
 
-    if (node.children) {
-      node.children.forEach((child) => {
-        links.push({ source: node.name, target: child.name });
-        traverse(child);
-      });
+  function traverse(node: TreeNode) {
+    const newNode: MyNode = {
+      id: node.id,
+      size: node.size,
+      children: node.children,
+    };
+
+    if (!visited.includes(newNode.id)) {
+      visited.push(newNode.id);
+      nodes.push(newNode);
+      if (node.children) {
+        node.children.forEach((child) => {
+          links.push({ source: node.id, target: child.id });
+          traverse(child);
+        });
+      }
     }
   }
 
@@ -86,7 +96,7 @@ export const buildTree = (
   root: string
 ): TreeNode => {
   const node: TreeNode = {
-    name: root,
+    id: root,
     children: [],
     size: getFileSize(root),
   };

@@ -1,11 +1,12 @@
 export interface TreeNode {
-  name: string;
+  id: string;
   children: TreeNode[];
   size: number;
 }
 
 export interface MyNode {
   id: string;
+  children?: TreeNode[];
   size: number;
 }
 

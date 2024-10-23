@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>module</title>
+    <title>Dep Track</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -28,14 +28,9 @@
             d3
               .forceLink(links)
               .id((d) => d.id)
-              .distance((d) => {
-                const sourceNode = nodes.find(
-                  (node) => node.id === d.source.id
-                );
-                return sourceNode ? sourceNode.size * 1.2 : 100;
-              })
+              .distance(100)
           )
-          .force("charge", d3.forceManyBody().strength(-300))
+          .force("charge", d3.forceManyBody().strength(-100))
           .force("center", d3.forceCenter(width / 2, height / 2));
 
         const link = svg
@@ -52,7 +47,7 @@
           .data(nodes)
           .enter()
           .append("circle")
-          .attr("r", (d) => d.size * 0.5 || 20)
+          .attr("r", 30)
           .attr("fill", "#fbbf24")
           .call(
             d3
@@ -89,14 +84,15 @@
         });
 
         function dragStarted(event, d) {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
+          if (!event.active) simulation.alphaTarget(0.2).restart();
           d.fx = d.x;
           d.fy = d.y;
         }
         function dragged(event, d) {
-          d.fx = event.x;
-          d.fy = event.y;
+          d.fx = Math.max(20, Math.min(window.innerWidth - 100, event.x));
+          d.fy = Math.max(20, Math.min(window.innerHeight - 100, event.y));
         }
+
         function dragEnded(event, d) {
           if (!event.active) simulation.alphaTarget(0);
           d.fx = null;

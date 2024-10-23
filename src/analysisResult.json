@@ -1,19 +1,100 @@
 {
   "nodes": [
     {
-      "id": "test/App.ts"
+      "id": "test/App.ts",
+      "size": 150,
+      "children": [
+        {
+          "id": "test/moduleB.ts",
+          "children": [
+            {
+              "id": "test/moduleD.ts",
+              "children": [
+                {
+                  "id": "test/moduleC.ts",
+                  "children": [
+                    {
+                      "id": "test/moduleE.ts",
+                      "children": [],
+                      "size": 36
+                    }
+                  ],
+                  "size": 94
+                }
+              ],
+              "size": 92
+            }
+          ],
+          "size": 93
+        },
+        {
+          "id": "test/moduleC.ts",
+          "children": [
+            {
+              "id": "test/moduleE.ts",
+              "children": [],
+              "size": 36
+            }
+          ],
+          "size": 94
+        }
+      ]
     },
     {
-      "id": "test/moduleB.ts"
+      "id": "test/moduleB.ts",
+      "size": 93,
+      "children": [
+        {
+          "id": "test/moduleD.ts",
+          "children": [
+            {
+              "id": "test/moduleC.ts",
+              "children": [
+                {
+                  "id": "test/moduleE.ts",
+                  "children": [],
+                  "size": 36
+                }
+              ],
+              "size": 94
+            }
+          ],
+          "size": 92
+        }
+      ]
     },
     {
-      "id": "test/moduleD.ts"
+      "id": "test/moduleD.ts",
+      "size": 92,
+      "children": [
+        {
+          "id": "test/moduleC.ts",
+          "children": [
+            {
+              "id": "test/moduleE.ts",
+              "children": [],
+              "size": 36
+            }
+          ],
+          "size": 94
+        }
+      ]
     },
     {
-      "id": "test/moduleC.ts"
+      "id": "test/moduleC.ts",
+      "size": 94,
+      "children": [
+        {
+          "id": "test/moduleE.ts",
+          "children": [],
+          "size": 36
+        }
+      ]
     },
     {
-      "id": "test/moduleE.ts"
+      "id": "test/moduleE.ts",
+      "size": 36,
+      "children": []
     }
   ],
   "links": [
@@ -26,12 +107,16 @@
       "target": "test/moduleD.ts"
     },
     {
-      "source": "test/App.ts",
+      "source": "test/moduleD.ts",
       "target": "test/moduleC.ts"
     },
     {
       "source": "test/moduleC.ts",
       "target": "test/moduleE.ts"
+    },
+    {
+      "source": "test/App.ts",
+      "target": "test/moduleC.ts"
     }
   ]
 }
