@@ -26,13 +26,16 @@ const extractImports = (filePath: string) => {
     imports.push(path.join(path.dirname(filePath), importPath));
   }
 
-  console.log(imports);
   return imports;
 };
 
 const getFileSize = (filePath: string): number => {
-  const stats = fs.statSync(filePath);
-  return stats.size;
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.size;
+  } catch (error) {
+    return 0;
+  }
 };
 
 export const extractNodesAndLinks = (
@@ -45,7 +48,7 @@ export const extractNodesAndLinks = (
   const links: Link[] = [];
 
   function traverse(node: TreeNode) {
-    const newNode: MyNode = { id: node.name };
+    const newNode: MyNode = { id: node.name, size: node.size };
     nodes.push(newNode);
 
     if (node.children) {

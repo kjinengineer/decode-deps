@@ -6,6 +6,7 @@ export interface TreeNode {
 
 export interface MyNode {
   id: string;
+  size: number;
 }
 
 export interface Link {
