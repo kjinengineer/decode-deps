@@ -1,3 +1,7 @@
-export const greet = (name: string): string => {
-  return `Hello, ${name}!`;
+import { somethingB } from "./moduleB";
+import { somethingC } from "./moduleC";
+
+export const somethingA = () => {
+  somethingB();
+  somethingC();
 };

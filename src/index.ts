@@ -4,7 +4,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 
-import { buildTree, extractNodesAndLinks, getDependencies } from "./getTree";
+import { buildTree, extractNodesAndLinks, getDependencies } from "./utils";
 
 // export default function depTrack() {
 const _filename = fileURLToPath(
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.get("/track", (req, res) => {
   const sourceDir = (req.query.sourceDir as string) || "./test";
-  const rootModule = (req.query.rootModule as string) || "test/app.ts";
+  const rootModule = (req.query.rootModule as string) || "test/App.ts";
 
   const dependencies = getDependencies(sourceDir);
   const dependencyTree = buildTree(dependencies, rootModule);

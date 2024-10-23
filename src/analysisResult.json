@@ -1,8 +1,37 @@
 {
   "nodes": [
     {
-      "id": "./test/app.ts"
+      "id": "test/App.ts"
+    },
+    {
+      "id": "test/moduleB.ts"
+    },
+    {
+      "id": "test/moduleD.ts"
+    },
+    {
+      "id": "test/moduleC.ts"
+    },
+    {
+      "id": "test/moduleE.ts"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "source": "test/App.ts",
+      "target": "test/moduleB.ts"
+    },
+    {
+      "source": "test/moduleB.ts",
+      "target": "test/moduleD.ts"
+    },
+    {
+      "source": "test/App.ts",
+      "target": "test/moduleC.ts"
+    },
+    {
+      "source": "test/moduleC.ts",
+      "target": "test/moduleE.ts"
+    }
+  ]
 }

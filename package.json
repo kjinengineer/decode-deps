@@ -15,7 +15,8 @@
     "server:esm": "node ./esm/index.js",
     "build": "npm run build:cjs & npm run build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
-    "build:esm": "tsc --p ./esm/tsconfig.json"
+    "build:esm": "tsc --p ./esm/tsconfig.json",
+    "build:orig": "tsc --outDir ./dist && cp -R public dist/public"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
