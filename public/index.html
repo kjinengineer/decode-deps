@@ -20,6 +20,14 @@
         const width = window.innerWidth;
         const height = window.innerHeight;
 
+        const sizeArray = nodes.map((d) => d.size);
+        const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
+
+        const colorScale = d3
+          .scaleLinear()
+          .domain([minModuleSize, maxModuleSize])
+          .range(["#fde68a", "#f59e0b"]);
+
         const svg = d3.select("svg");
         const simulation = d3
           .forceSimulation(nodes)
@@ -28,9 +36,9 @@
             d3
               .forceLink(links)
               .id((d) => d.id)
-              .distance(100)
+              .distance(120)
           )
-          .force("charge", d3.forceManyBody().strength(-100))
+          .force("charge", d3.forceManyBody().strength(-200))
           .force("center", d3.forceCenter(width / 2, height / 2));
 
         const link = svg
@@ -48,7 +56,9 @@
           .enter()
           .append("circle")
           .attr("r", 30)
-          .attr("fill", "#fbbf24")
+          .attr("fill", (d) => colorScale(d.size))
+          .attr("stroke", "#fde68a")
+          .attr("stroke-width", 1)
           .call(
             d3
               .drag()
