@@ -87,13 +87,11 @@ export const getDependencies = (
       const stats = fs.statSync(filePath);
 
       if (stats.isDirectory()) {
-        // 디렉토리일 경우 재귀적으로 탐색
         traverseDirectory(filePath);
       } else if (
         stats.isFile() &&
         (file.endsWith(".ts") || file.endsWith(".js"))
       ) {
-        // 파일일 경우 의존성 추출
         dependencies[filePath] = extractImports(filePath);
       }
     });

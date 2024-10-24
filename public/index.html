@@ -23,6 +23,12 @@
         const sizeArray = nodes.map((d) => d.size);
         const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
+        const tooltip = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("visibility", "hidden");
+
         const colorScale = d3
           .scaleLinear()
           .domain([minModuleSize, maxModuleSize])
@@ -47,7 +53,7 @@
           .data(links)
           .enter()
           .append("line")
-          .style("stroke", "#d4d4d8");
+          .style("stroke", "#e5e7eb");
 
         const node = svg
           .append("g")
@@ -59,6 +65,17 @@
           .attr("fill", (d) => colorScale(d.size))
           .attr("stroke", "#fde68a")
           .attr("stroke-width", 1)
+          .on("mouseover", function (event, d) {
+            tooltip.style("visibility", "visible").text(`${d.size} bytes`);
+          })
+          .on("mousemove", function (event) {
+            tooltip
+              .style("top", `${event.pageY + 10}px`)
+              .style("left", `${event.pageX + 10}px`);
+          })
+          .on("mouseout", function () {
+            tooltip.style("visibility", "hidden");
+          })
           .call(
             d3
               .drag()
@@ -102,14 +119,12 @@
           d.fx = Math.max(20, Math.min(window.innerWidth - 100, event.x));
           d.fy = Math.max(20, Math.min(window.innerHeight - 100, event.y));
         }
-
         function dragEnded(event, d) {
           if (!event.active) simulation.alphaTarget(0);
           d.fx = null;
           d.fy = null;
         }
       }
-
       fetchTreeData();
     </script>
   </body>
