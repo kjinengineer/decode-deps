@@ -12,7 +12,7 @@ const _filename = fileURLToPath(
 const __dirname = dirname(_filename);
 
 const app = express();
-const port = 4000;
+const port = 5000;
 
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -21,11 +21,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/track", (req, res) => {
-  const sourceDir = (req.query.sourceDir as string[]) || [
-    "./test",
-    "./testmodule",
-  ];
-  const rootModule = (req.query.rootModule as string) || "test/App.ts";
+  const sourceDir = (req.query.sourceDir as string[]) || ["./src"];
+  const rootModule = (req.query.rootModule as string) || "src/App.tsx";
 
   const dependencies = getDependencies(sourceDir);
   const dependencyTree = buildTree(dependencies, rootModule);

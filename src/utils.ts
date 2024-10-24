@@ -97,30 +97,12 @@ export const getDependencies = (
     });
   }
 
-  // 배열로 받은 디렉토리를 하나씩 탐색
   dirs.forEach((dir) => {
     traverseDirectory(dir);
   });
 
   return dependencies;
 };
-
-// export const getDependencies = (dir: string): { [key: string]: string[] } => {
-//   const files = fs.readdirSync(dir);
-//   const dependencies: { [key: string]: string[] } = {};
-
-//   files.forEach((file: any) => {
-//     const filePath = path.join(dir, file);
-//     if (
-//       fs.statSync(filePath).isFile() &&
-//       (file.endsWith(".ts") || file.endsWith(".js"))
-//     ) {
-//       dependencies[filePath] = extractImports(filePath);
-//     }
-//   });
-
-//   return dependencies;
-// };
 
 export const buildTree = (
   deps: { [key: string]: string[] },
