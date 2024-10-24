@@ -74,22 +74,55 @@ export const extractNodesAndLinks = (
   return { nodes, links };
 };
 
-export const getDependencies = (dir: string): { [key: string]: string[] } => {
-  const files = fs.readdirSync(dir);
+export const getDependencies = (
+  dirs: string[]
+): { [key: string]: string[] } => {
   const dependencies: { [key: string]: string[] } = {};
 
-  files.forEach((file: any) => {
-    const filePath = path.join(dir, file);
-    if (
-      fs.statSync(filePath).isFile() &&
-      (file.endsWith(".ts") || file.endsWith(".js"))
-    ) {
-      dependencies[filePath] = extractImports(filePath);
-    }
+  function traverseDirectory(currentDir: string) {
+    const files = fs.readdirSync(currentDir);
+
+    files.forEach((file) => {
+      const filePath = path.join(currentDir, file);
+      const stats = fs.statSync(filePath);
+
+      if (stats.isDirectory()) {
+        // 디렉토리일 경우 재귀적으로 탐색
+        traverseDirectory(filePath);
+      } else if (
+        stats.isFile() &&
+        (file.endsWith(".ts") || file.endsWith(".js"))
+      ) {
+        // 파일일 경우 의존성 추출
+        dependencies[filePath] = extractImports(filePath);
+      }
+    });
+  }
+
+  // 배열로 받은 디렉토리를 하나씩 탐색
+  dirs.forEach((dir) => {
+    traverseDirectory(dir);
   });
 
   return dependencies;
 };
+
+// export const getDependencies = (dir: string): { [key: string]: string[] } => {
+//   const files = fs.readdirSync(dir);
+//   const dependencies: { [key: string]: string[] } = {};
+
+//   files.forEach((file: any) => {
+//     const filePath = path.join(dir, file);
+//     if (
+//       fs.statSync(filePath).isFile() &&
+//       (file.endsWith(".ts") || file.endsWith(".js"))
+//     ) {
+//       dependencies[filePath] = extractImports(filePath);
+//     }
+//   });
+
+//   return dependencies;
+// };
 
 export const buildTree = (
   deps: { [key: string]: string[] },

@@ -21,7 +21,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/track", (req, res) => {
-  const sourceDir = (req.query.sourceDir as string) || "./test";
+  const sourceDir = (req.query.sourceDir as string[]) || [
+    "./test",
+    "./testmodule",
+  ];
   const rootModule = (req.query.rootModule as string) || "test/App.ts";
 
   const dependencies = getDependencies(sourceDir);
