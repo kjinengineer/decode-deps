@@ -7,7 +7,8 @@ const extractImports = (filePath: string) => {
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
   const imports: string[] = [];
 
-  let match;
+  let match: RegExpExecArray;
+
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
 
@@ -26,13 +27,16 @@ const extractImports = (filePath: string) => {
     imports.push(path.join(path.dirname(filePath), importPath));
   }
 
-  console.log(imports);
   return imports;
 };
 
 const getFileSize = (filePath: string): number => {
-  const stats = fs.statSync(filePath);
-  return stats.size;
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.size;
+  } catch (error) {
+    return 0;
+  }
 };
 
 export const extractNodesAndLinks = (
@@ -44,35 +48,57 @@ export const extractNodesAndLinks = (
   const nodes: MyNode[] = [];
   const links: Link[] = [];
 
-  function traverse(node: TreeNode) {
-    const newNode: MyNode = { id: node.name };
-    nodes.push(newNode);
+  const visited = [];
 
-    if (node.children) {
-      node.children.forEach((child) => {
-        links.push({ source: node.name, target: child.name });
-        traverse(child);
-      });
+  function getNodes(node: TreeNode) {
+    const newNode: MyNode = {
+      id: node.id,
+      size: node.size,
+      children: node.children,
+    };
+
+    if (!visited.includes(newNode.id)) {
+      visited.push(newNode.id);
+      nodes.push(newNode);
+      if (node.children) {
+        node.children.forEach((child) => {
+          links.push({ source: node.id, target: child.id });
+          getNodes(child);
+        });
+      }
     }
   }
 
-  traverse(tree);
+  getNodes(tree);
 
   return { nodes, links };
 };
 
-export const getDependencies = (dir: string): { [key: string]: string[] } => {
-  const files = fs.readdirSync(dir);
+export const getDependencies = (
+  dirs: string[]
+): { [key: string]: string[] } => {
   const dependencies: { [key: string]: string[] } = {};
 
-  files.forEach((file: any) => {
-    const filePath = path.join(dir, file);
-    if (
-      fs.statSync(filePath).isFile() &&
-      (file.endsWith(".ts") || file.endsWith(".js"))
-    ) {
-      dependencies[filePath] = extractImports(filePath);
-    }
+  function traverseDirectory(currentDir: string) {
+    const files = fs.readdirSync(currentDir);
+
+    files.forEach((file) => {
+      const filePath = path.join(currentDir, file);
+      const stats = fs.statSync(filePath);
+
+      if (stats.isDirectory()) {
+        traverseDirectory(filePath);
+      } else if (
+        stats.isFile() &&
+        (file.endsWith(".ts") || file.endsWith(".js"))
+      ) {
+        dependencies[filePath] = extractImports(filePath);
+      }
+    });
+  }
+
+  dirs.forEach((dir) => {
+    traverseDirectory(dir);
   });
 
   return dependencies;
@@ -83,7 +109,7 @@ export const buildTree = (
   root: string
 ): TreeNode => {
   const node: TreeNode = {
-    name: root,
+    id: root,
     children: [],
     size: getFileSize(root),
   };

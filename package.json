@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "cjs/index.js",
   "module": "esm/index.js",
+  "license": "MIT",
   "exports": {
     ".": {
       "import": "./esm/index.js",
@@ -10,26 +11,22 @@
     }
   },
   "scripts": {
-    "dev": "npx tsx ./src/index.ts",
-    "server:cjs": "node ./cjs/index.js",
-    "server:esm": "node ./esm/index.js",
-    "build": "yarn build:cjs & yarn build:esm",
+    "dev": "npx tsx dist/routes.js",
+    "build:module": "yarn build:cjs & yarn build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
     "build:esm": "tsc --p ./esm/tsconfig.json",
-    "build:orig": "tsc --outDir ./dist && cp -R public dist/public"
+    "build": "tsc --outDir ./dist && cp -R src/public dist"
+  },
+  "bin": {
+    "deptrack": "./bin/deptrack.js"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/node": "^22.7.5",
-    "cors": "^2.8.5",
     "express": "^4.21.1",
-    "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "node-fetch": "^3.3.2",
-    "open": "^10.1.0"
-  },
-  "license": "MIT"
+    "d3": "^7.9.0"
+  }
 }
