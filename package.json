@@ -11,11 +11,11 @@
     }
   },
   "scripts": {
-    "dev": "npx tsx ./src/test.ts",
-    "build": "yarn build:cjs & yarn build:esm",
+    "dev": "npx tsx dist/routes.js",
+    "build:module": "yarn build:cjs & yarn build:esm",
     "build:cjs": "tsc --p ./cjs/tsconfig.json",
     "build:esm": "tsc --p ./esm/tsconfig.json",
-    "build:orig": "tsc --outDir ./dist && cp -R frontend/public dist/frontend"
+    "build": "tsc --outDir ./dist && cp -R src/public dist"
   },
   "bin": {
     "deptrack": "./bin/deptrack.js"
