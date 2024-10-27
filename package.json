@@ -11,14 +11,12 @@
     }
   },
   "scripts": {
-    "dev": "npx tsx dist/routes.js",
-    "build:module": "yarn build:cjs & yarn build:esm",
-    "build:cjs": "tsc --p ./cjs/tsconfig.json",
-    "build:esm": "tsc --p ./esm/tsconfig.json",
-    "build": "tsc --outDir ./dist && cp -R src/public dist"
-  },
-  "bin": {
-    "deptrack": "./bin/deptrack.js"
+    "dev": "node test.js",
+    "dev:ts": "npx tsx src/routes.js",
+    "build": "yarn build:cjs & yarn build:esm",
+    "build:cjs": "tsc --outDir ./module/cjs --p ./cjs/tsconfig.json",
+    "build:esm": "tsc --outDir ./module/esm --p ./esm/tsconfig.json",
+    "build:orig": "tsc --outDir ./dist && cp -R src/public dist"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

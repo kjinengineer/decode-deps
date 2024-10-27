@@ -42,7 +42,7 @@
             d3
               .forceLink(links)
               .id((d) => d.id)
-              .distance(120)
+              .distance(150)
           )
           .force("charge", d3.forceManyBody().strength(-200))
           .force("center", d3.forceCenter(width / 2, height / 2));
@@ -53,7 +53,7 @@
           .data(links)
           .enter()
           .append("line")
-          .style("stroke", "#e5e7eb");
+          .style("stroke", "#d1d5db");
 
         const node = svg
           .append("g")
@@ -63,7 +63,7 @@
           .append("circle")
           .attr("r", 30)
           .attr("fill", (d) => colorScale(d.size))
-          .attr("stroke", "#fde68a")
+          .attr("stroke", "#374151")
           .attr("stroke-width", 1)
           .on("mouseover", function (event, d) {
             tooltip.style("visibility", "visible").text(`${d.size} bytes`);
