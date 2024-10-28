@@ -1,0 +1,9 @@
+/src
+/cjs
+/esm
+/node_modules
+/test.js
+.gitignore
+tsconfig.json
+yarn.lock
+.github
