@@ -18,5 +18,4 @@ export interface Link {
 export interface InputProps {
   sourceDir: string[];
   rootModule: string;
-  port: number;
 }

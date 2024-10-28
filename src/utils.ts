@@ -8,23 +8,29 @@ const extractImports = (filePath: string) => {
   const imports: string[] = [];
 
   let match: RegExpExecArray;
-
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
 
-    if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
-      if (
-        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".ts"))
-      ) {
-        importPath += ".ts";
-      } else if (
-        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".js"))
-      ) {
-        importPath += ".js";
+    if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
+      imports.push(importPath);
+    } else {
+      if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
+        if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".ts")
+          )
+        ) {
+          importPath += ".ts";
+        } else if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".js")
+          )
+        ) {
+          importPath += ".js";
+        }
       }
+      imports.push(path.join(path.dirname(filePath), importPath));
     }
-
-    imports.push(path.join(path.dirname(filePath), importPath));
   }
 
   return imports;
@@ -33,7 +39,7 @@ const extractImports = (filePath: string) => {
 const getFileSize = (filePath: string): number => {
   try {
     const stats = fs.statSync(filePath);
-    return stats.size;
+    return parseFloat((stats.size / 1024).toFixed(2));
   } catch (error) {
     return 0;
   }
