@@ -51,20 +51,20 @@ text {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 12px 14px;
+  margin: 3px 6px;
 }
 
 .bar label {
-  font-size: 13px;
+  font-size: 12px;
   color: #555;
-  margin-right: 15px;
+  margin: 2px 15px 2px 0;
 }
 
 .bar input[type="range"] {
   width: 120px;
   -webkit-appearance: none;
   appearance: none;
-  height: 5px;
+  height: 4px;
   background: #d1d5db;
   outline: none;
   opacity: 0.9;
@@ -75,11 +75,11 @@ text {
 .bar input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 12px;
+  width: 7px;
   height: 12px;
   background: #f59e0b;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .bar input[type="range"]:hover {
