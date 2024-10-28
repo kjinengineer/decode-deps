@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "exports": {
-    ".": "./module/index.js"
+    ".": "./dist/index.js"
   },
   "scripts": {
     "dev": "node test.js",
