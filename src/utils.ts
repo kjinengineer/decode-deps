@@ -1,6 +1,22 @@
 import * as fs from "fs";
 import * as path from "path";
-import { Link, NodeType, TreeNode } from "./types";
+
+interface TreeNode {
+  id: string;
+  children: TreeNode[];
+  size: number;
+}
+
+interface NodeType {
+  id: string;
+  children?: TreeNode[];
+  size: number;
+}
+
+interface LinkType {
+  source: string;
+  target: string;
+}
 
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
@@ -49,10 +65,10 @@ export const extractNodesAndLinks = (
   tree: TreeNode
 ): {
   nodes: NodeType[];
-  links: Link[];
+  links: LinkType[];
 } => {
   const nodes: NodeType[] = [];
-  const links: Link[] = [];
+  const links: LinkType[] = [];
 
   const visited = [];
 

@@ -3,7 +3,11 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 
 import { buildTree, extractNodesAndLinks, getDependencies } from "./utils";
-import { InputProps } from "./types";
+
+interface InputProps {
+  sourceDir: string[];
+  rootModule: string;
+}
 
 const port = 5500;
 
