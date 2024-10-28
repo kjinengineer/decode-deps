@@ -10,7 +10,13 @@
       <div class="controls">
         <div class="bar">
           <label for="nodeSize">Node Size</label>
-          <input type="range" id="nodeSize" min="10" max="50" value="30" />
+          <input
+            type="range"
+            id="nodeSize"
+            min="10"
+            max="50"
+            value='${localStorage.getItem("nodeSize") || 30}'
+          />
         </div>
         <div class="bar">
           <label for="linkDistance">Link Distance</label>
@@ -19,7 +25,7 @@
             id="linkDistance"
             min="50"
             max="200"
-            value="125"
+            value='${localStorage.getItem("linkDistance") || 125}'
           />
         </div>
       </div>
@@ -27,6 +33,16 @@
 
     <script type="module">
       import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+      let savedNodeSize = 30;
+      let savedLinkDistance = 125;
+
+      window.onload = () => {
+        savedNodeSize = localStorage.getItem("nodeSize");
+        savedLinkDistance = localStorage.getItem("linkDistance");
+        document.getElementById("nodeSize").value = savedNodeSize;
+        document.getElementById("linkDistance").value = savedLinkDistance;
+      };
 
       const response = await fetch("http://localhost:5500/track");
       const data = await response.json();
@@ -38,6 +54,8 @@
       const sizeArray = nodes.map((d) => d.size);
       const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
+      const svg = d3.select("svg");
+
       const tooltip = d3
         .select("body")
         .append("div")
@@ -48,19 +66,6 @@
         .scaleLinear()
         .domain([minModuleSize, maxModuleSize])
         .range(["#fde68a", "#f59e0b"]);
-
-      const svg = d3.select("svg");
-      const simulation = d3
-        .forceSimulation(nodes)
-        .force(
-          "link",
-          d3
-            .forceLink(links)
-            .id((d) => d.id)
-            .distance(150)
-        )
-        .force("charge", d3.forceManyBody().strength(-200))
-        .force("center", d3.forceCenter(width / 2, height / 2));
 
       const link = svg
         .append("g")
@@ -76,7 +81,7 @@
         .data(nodes)
         .enter()
         .append("circle")
-        .attr("r", 30)
+        .attr("r", savedNodeSize)
         .attr("fill", (d) => colorScale(d.size))
         .attr("stroke-width", 1)
         .on("mouseover", function (event, d) {
@@ -111,6 +116,18 @@
         .attr("dominant-baseline", "middle")
         .style("font-size", "12px");
 
+      const simulation = d3
+        .forceSimulation(nodes)
+        .force(
+          "link",
+          d3
+            .forceLink(links)
+            .id((d) => d.id)
+            .distance(savedLinkDistance)
+        )
+        .force("charge", d3.forceManyBody().strength(-200))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
       simulation.on("tick", () => {
         link
           .attr("x1", (d) => d.source.x)
@@ -141,6 +158,7 @@
 
       document.getElementById("nodeSize").addEventListener("input", (event) => {
         const newSize = +event.target.value;
+        localStorage.setItem("nodeSize", newSize);
         node.attr("r", newSize);
         simulation.alpha(1).restart();
       });
@@ -149,6 +167,7 @@
         .getElementById("linkDistance")
         .addEventListener("input", (event) => {
           const newDistance = +event.target.value;
+          localStorage.setItem("linkDistance", newDistance);
           simulation.force(
             "link",
             d3
