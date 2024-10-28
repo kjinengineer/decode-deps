@@ -2,3 +2,11 @@ node_modules
 package-lock.json
 module
 test.js
+
+cjs
+!cjs/tsconfig.json
+!cjs/package.json
+
+esm
+!esm/tsconfig.json
+!esm/package.json

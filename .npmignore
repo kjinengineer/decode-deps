@@ -1,6 +1,4 @@
 /src
-/cjs
-/esm
 /node_modules
 /test.js
 .gitignore

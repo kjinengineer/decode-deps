@@ -1,20 +1,20 @@
 {
   "name": "dep-track",
-  "version": "0.0.1",
-  "main": "module/cjs/index.js",
-  "module": "module/esm/index.js",
+  "version": "0.0.2",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "license": "MIT",
   "exports": {
     ".": {
-      "import": "./module/esm/index.js",
-      "require": "./module/cjs/index.js"
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
     }
   },
   "scripts": {
     "dev": "node test.js",
     "build": "yarn build:cjs & yarn build:esm",
-    "build:cjs": "tsc --outDir ./module/cjs --p ./cjs/tsconfig.json",
-    "build:esm": "tsc --outDir ./module/esm --p ./esm/tsconfig.json"
+    "build:cjs": "tsc --outDir ./cjs --p ./cjs/tsconfig.json",
+    "build:esm": "tsc --outDir ./esm --p ./esm/tsconfig.json"
   },
   "dependencies": {
     "@types/express": "^5.0.0",
