@@ -12,8 +12,8 @@
     <script type="module">
       import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-      async function makeModuleTree(port = 4000) {
-        const response = await fetch(`http://localhost:${port}/result`);
+      async function makeModuleTree() {
+        const response = await fetch("http://localhost:5500/track");
         const data = await response.json();
         const { nodes, links } = data;
 

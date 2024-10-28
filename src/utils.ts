@@ -2,6 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { Link, NodeType, TreeNode } from "./types";
 
+export const port = 6000;
+
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
