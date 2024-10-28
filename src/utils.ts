@@ -2,35 +2,67 @@ import * as fs from "fs";
 import * as path from "path";
 import { Link, NodeType, TreeNode } from "./types";
 
-export const port = 6000;
-
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
   const imports: string[] = [];
 
-  let match: RegExpExecArray;
-
+  let match;
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
 
-    if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
-      if (
-        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".ts"))
-      ) {
-        importPath += ".ts";
-      } else if (
-        fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".js"))
-      ) {
-        importPath += ".js";
+    if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
+      imports.push(importPath);
+    } else {
+      if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
+        if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".ts")
+          )
+        ) {
+          importPath += ".ts";
+        } else if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".js")
+          )
+        ) {
+          importPath += ".js";
+        }
       }
+      imports.push(path.join(path.dirname(filePath), importPath));
     }
-
-    imports.push(path.join(path.dirname(filePath), importPath));
   }
 
   return imports;
 };
+
+// const extractImports = (filePath: string) => {
+//   const content = fs.readFileSync(filePath, "utf-8");
+//   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
+//   const imports: string[] = [];
+
+//   let match: RegExpExecArray;
+
+//   while ((match = importRegex.exec(content)) !== null) {
+//     let importPath = match[1];
+
+//     if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
+//       if (
+//         fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".ts"))
+//       ) {
+//         importPath += ".ts";
+//       } else if (
+//         fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".js"))
+//       ) {
+//         importPath += ".js";
+//       }
+//     }
+
+//     imports.push(path.join(path.dirname(filePath), importPath));
+//   }
+
+//   return imports;
+// };
 
 const getFileSize = (filePath: string): number => {
   try {
