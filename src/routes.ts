@@ -14,7 +14,7 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
   const _dirname = dirname(_filename);
 
   const app = express();
-  app.use(express.static(path.join(_dirname, "../../public")));
+  app.use(express.static(path.join(_dirname, "../public")));
 
   app.get("/", async (req, res) => {
     res.sendFile(path.join(_dirname, "public", "index.html"));
