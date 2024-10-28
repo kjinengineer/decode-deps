@@ -7,7 +7,7 @@ const extractImports = (filePath: string) => {
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
   const imports: string[] = [];
 
-  let match;
+  let match: RegExpExecArray;
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
 
@@ -36,38 +36,10 @@ const extractImports = (filePath: string) => {
   return imports;
 };
 
-// const extractImports = (filePath: string) => {
-//   const content = fs.readFileSync(filePath, "utf-8");
-//   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
-//   const imports: string[] = [];
-
-//   let match: RegExpExecArray;
-
-//   while ((match = importRegex.exec(content)) !== null) {
-//     let importPath = match[1];
-
-//     if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
-//       if (
-//         fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".ts"))
-//       ) {
-//         importPath += ".ts";
-//       } else if (
-//         fs.existsSync(path.resolve(path.dirname(filePath), importPath + ".js"))
-//       ) {
-//         importPath += ".js";
-//       }
-//     }
-
-//     imports.push(path.join(path.dirname(filePath), importPath));
-//   }
-
-//   return imports;
-// };
-
 const getFileSize = (filePath: string): number => {
   try {
     const stats = fs.statSync(filePath);
-    return stats.size;
+    return parseFloat((stats.size / 1024).toFixed(2));
   } catch (error) {
     return 0;
   }
