@@ -11,4 +11,4 @@ _Explain the code change_
 
 ### Target Branch
 
-develop &rarr; main
+develop -> main

@@ -29,6 +29,6 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
   });
 
   app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Module Dependency Graph Ready at http://localhost:${port}`);
   });
 }

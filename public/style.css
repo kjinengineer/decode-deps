@@ -38,6 +38,7 @@ text {
 }
 
 .controls {
+  z-index: 100;
   background-color: #f3f4f6;
   position: absolute;
   top: 0;
