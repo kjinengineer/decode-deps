@@ -11,9 +11,11 @@
   },
   "scripts": {
     "dev": "node test.js",
-    "build": "yarn build:cjs & yarn build:esm",
-    "build:cjs": "tsc --outDir ./dist/cjs --p ./config/cjs/tsconfig.json && cp -R public dist/cjs",
-    "build:esm": "tsc --outDir ./dist/esm --p ./config/esm/tsconfig.json && cp -R public dist/esm"
+    "clean": "rm -rf dist",
+    "build:cjs": "tsc --p ./config/cjs/tsconfig.json",
+    "build:esm": "tsc --p ./config/esm/tsconfig.json",
+    "build:graph": "tsc --p ./tsconfig.graph.json && cp -R public dist",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:graph"
   },
   "dependencies": {
     "d3": "^7.9.0",
