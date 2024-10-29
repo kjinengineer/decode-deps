@@ -16,9 +16,10 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
   const _dirname = dirname(_filename);
 
   const app = express();
-  app.use(express.static(path.join(_dirname, "public")));
+  app.use(express.static(path.join(_dirname, "../../public")));
+  app.use(express.static(path.join(__dirname, "dist")));
 
-  app.get("/", async (req, res) => {
+  app.get("/", (req, res) => {
     res.sendFile(path.join(_dirname, "public", "index.html"));
   });
 
@@ -26,7 +27,7 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
     const dependencies = getDependencies(sourceDir);
     const dependencyTree = buildTree(dependencies, rootModule);
     const resultData = extractNodesAndLinks(dependencyTree);
-    console.log(path.join(_dirname, "public"));
+
     res.json(resultData);
   });
 
