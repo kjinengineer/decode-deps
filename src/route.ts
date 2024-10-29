@@ -1,7 +1,6 @@
 import express from "express";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-
 import { buildTree, extractNodesAndLinks, getDependencies } from "./utils";
 
 interface InputProps {
@@ -9,9 +8,8 @@ interface InputProps {
   rootModule: string;
 }
 
-const port = 5500;
-
 export default function depTrack({ sourceDir, rootModule }: InputProps) {
+  const port = 6000;
   const _filename = fileURLToPath(
     require("url").pathToFileURL(__filename).toString()
   );
