@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const port = 6000;
+const port = 5001;
 let savedNodeSize = 30;
 let savedLinkDistance = 125;
 

@@ -9,14 +9,14 @@ interface InputProps {
 }
 
 export default function depTrack({ sourceDir, rootModule }: InputProps) {
-  const port = 6000;
+  const port = 5001;
   const _filename = fileURLToPath(
     require("url").pathToFileURL(__filename).toString()
   );
   const _dirname = dirname(_filename);
 
   const app = express();
-  app.use(express.static(path.join(_dirname, "../public")));
+  app.use(express.static(path.join(_dirname, "public")));
 
   app.get("/", async (req, res) => {
     res.sendFile(path.join(_dirname, "public", "index.html"));
@@ -26,7 +26,7 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
     const dependencies = getDependencies(sourceDir);
     const dependencyTree = buildTree(dependencies, rootModule);
     const resultData = extractNodesAndLinks(dependencyTree);
-
+    console.log(path.join(_dirname, "public"));
     res.json(resultData);
   });
 
