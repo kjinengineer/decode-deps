@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES6",
     "declaration": true,
     "declarationDir": "./dist",
-    "outDir": "./dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
