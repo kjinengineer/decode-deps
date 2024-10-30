@@ -1,4 +1,5 @@
 node_modules
 package-lock.json
-module
 test.js
+dist
+*.tgz

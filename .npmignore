@@ -1,0 +1,7 @@
+/src
+/node_modules
+/test.js
+.gitignore
+tsconfig.json
+yarn.lock
+.github

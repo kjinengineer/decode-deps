@@ -1,28 +1,34 @@
 {
   "name": "dep-track",
   "version": "0.0.1",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
-  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./esm/index.js",
-      "require": "./cjs/index.js"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     }
   },
   "scripts": {
     "dev": "node test.js",
-    "build": "yarn build:cjs & yarn build:esm",
-    "build:cjs": "tsc --outDir ./module/cjs --p ./cjs/tsconfig.json",
-    "build:esm": "tsc --outDir ./module/esm --p ./esm/tsconfig.json",
-    "build:orig": "tsc --outDir ./dist && cp -R src/public dist"
+    "clean": "rm -rf dist",
+    "build:cjs": "tsc --p ./config/cjs/tsconfig.json",
+    "build:esm": "tsc --p ./config/esm/tsconfig.json",
+    "build": "yarn build:cjs && yarn build:esm"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "dep-track": "./dep-track-0.0.1.tgz",
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "express": "^4.21.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.6.3"
   },
-  "dependencies": {
-    "d3": "^7.9.0"
-  }
+  "author": {
+    "name": "zn"
+  },
+  "license": "MIT",
+  "description": "Dependency Graph",
+  "keywords": []
 }

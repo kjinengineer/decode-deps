@@ -1,13 +1,15 @@
 import express from "express";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-
 import { buildTree, extractNodesAndLinks, getDependencies } from "./utils";
-import { InputProps } from "./types";
 
-const port = 5500;
+interface InputProps {
+  sourceDir: string[];
+  rootModule: string;
+}
 
 export default function depTrack({ sourceDir, rootModule }: InputProps) {
+  const port = 5001;
   const _filename = fileURLToPath(
     require("url").pathToFileURL(__filename).toString()
   );
@@ -15,8 +17,9 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
 
   const app = express();
   app.use(express.static(path.join(_dirname, "../../public")));
+  app.use(express.static(path.join(__dirname, "dist")));
 
-  app.get("/", async (req, res) => {
+  app.get("/", (req, res) => {
     res.sendFile(path.join(_dirname, "public", "index.html"));
   });
 
@@ -29,6 +32,6 @@ export default function depTrack({ sourceDir, rootModule }: InputProps) {
   });
 
   app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Module Dependency Graph Ready at http://localhost:${port}`);
   });
 }
