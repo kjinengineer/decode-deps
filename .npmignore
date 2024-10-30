@@ -1,7 +1,10 @@
-/src
-/node_modules
-/test.js
-.gitignore
-tsconfig.json
-yarn.lock
 .github
+node_modules
+public
+src
+.gitignore
+test.js
+tsconfig.json
+tsconfig.cjs.json
+tsconfig.esm.json
+yarn.lock

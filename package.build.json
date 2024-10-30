@@ -9,15 +9,7 @@
       "import": "./esm/index.js"
     }
   },
-  "scripts": {
-    "dev": "node test.js",
-    "build:cjs": "tsc --project tsconfig.cjs.json && cp -R public dist/cjs",
-    "build:esm": "tsc --project tsconfig.esm.json && cp -R public dist/esm",
-    "build:cp": "cp package.build.json dist/package.json && cp README.md dist",
-    "build": "rm -fr dist && yarn build:cjs && yarn build:esm && yarn build:cp && cd dist && npm pack"
-  },
   "dependencies": {
-    "dep-track": "./dep-track-0.0.12.tgz",
     "express": "^4.21.1"
   },
   "devDependencies": {

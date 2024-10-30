@@ -21,12 +21,39 @@ interface LinkType {
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
+  const requireRegex = /require\(['"](.*?)['"]\)/g;
   const imports: string[] = [];
 
   let match: RegExpExecArray;
+
+  // import
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
+    if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
+      imports.push(importPath);
+    } else {
+      if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
+        if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".ts")
+          )
+        ) {
+          importPath += ".ts";
+        } else if (
+          fs.existsSync(
+            path.resolve(path.dirname(filePath), importPath + ".js")
+          )
+        ) {
+          importPath += ".js";
+        }
+      }
+      imports.push(path.join(path.dirname(filePath), importPath));
+    }
+  }
 
+  // require
+  while ((match = requireRegex.exec(content)) !== null) {
+    let importPath = match[1];
     if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
       imports.push(importPath);
     } else {
