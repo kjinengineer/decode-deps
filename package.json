@@ -1,20 +1,24 @@
 {
   "name": "dep-track",
   "version": "0.0.1",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "files": [
+    "**"
+  ],
+  "main": "./index.js",
+  "module": "./esm/index.js",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./index.js",
+      "import": "./esm/index.js"
     }
   },
   "scripts": {
     "dev": "node test.js",
     "clean": "rm -rf dist",
-    "build:cjs": "tsc --p ./config/cjs/tsconfig.json",
-    "build:esm": "tsc --p ./config/esm/tsconfig.json",
-    "build": "yarn build:cjs && yarn build:esm"
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build": "yarn build:cjs && yarn build:esm && cp package.json dist"
   },
   "dependencies": {
     "d3": "^7.9.0",
