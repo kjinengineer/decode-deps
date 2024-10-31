@@ -3,13 +3,14 @@
   "version": "0.0.15",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/test.ts",
+    "dev": "node dist/test.js",
     "build": "rm -fr dist && tsc --project tsconfig.json"
   },
   "bin": {
     "deptrack": "./bin/cli.js"
   },
   "dependencies": {
+    "d3": "^7.9.0",
     "express": "^4.21.1"
   },
   "devDependencies": {
