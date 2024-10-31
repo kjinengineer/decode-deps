@@ -1,17 +1,15 @@
 {
   "name": "dep-track",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "type": "module",
   "scripts": {
-    "dev": "tsx test.ts",
     "build": "rm -fr dist && tsc --project tsconfig.json"
   },
   "bin": {
     "deptrack": "./bin/cli.js"
   },
   "dependencies": {
-    "express": "^4.21.1",
-    "tsx": "^4.19.2"
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
