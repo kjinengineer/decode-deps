@@ -127,7 +127,11 @@
               .id((d) => d.id)
               .distance(savedLinkDistance)
           )
-          .force("charge", d3.forceManyBody().strength(-200))
+          .force("charge", d3.forceManyBody().strength(-50))
+          .force(
+            "collide",
+            d3.forceCollide().radius((d) => d.size + 5)
+          )
           .force("center", d3.forceCenter(width / 2, height / 2));
 
         simulation.on("tick", () => {
@@ -136,7 +140,21 @@
             .attr("y1", (d) => d.source.y)
             .attr("x2", (d) => d.target.x)
             .attr("y2", (d) => d.target.y);
-          node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+          node
+            .attr("cx", (d) => {
+              if (d.x < 0 || d.x > width) {
+                d.vx *= -1;
+                d.x = Math.max(0, Math.min(width, d.x));
+              }
+              return d.x;
+            })
+            .attr("cy", (d) => {
+              if (d.y < 0 || d.y > height) {
+                d.vy *= -1;
+                d.y = Math.max(0, Math.min(height, d.y));
+              }
+              return d.y;
+            });
           svg
             .selectAll("text")
             .attr("x", (d) => d.x)
