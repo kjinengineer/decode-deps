@@ -1,21 +1,19 @@
 {
-  "name": "dep-track",
-  "version": "0.0.17",
+  "name": "dep-scope",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "node dist/test.js",
     "build": "rm -fr dist && tsc --project tsconfig.json"
   },
   "bin": {
-    "dep-track": "./bin/cli.js"
+    "dep-scope": "./bin/cli.js"
   },
   "dependencies": {
-    "d3": "^7.9.0",
     "express": "^4.21.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   },
   "author": {
@@ -23,5 +21,16 @@
   },
   "license": "MIT",
   "description": "Dependency Graph",
-  "keywords": []
+  "keywords": [
+    "dependency graph",
+    "module dependencies",
+    "dependency analysis",
+    "code visualization",
+    "dependency mapping",
+    "project structure",
+    "JavaScript dependencies",
+    "module relationship",
+    "architecture insight",
+    "frontend tools"
+  ]
 }
