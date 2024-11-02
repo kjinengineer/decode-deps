@@ -50,7 +50,7 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 
 ## Docs
 
-Find detailed documentation and updates in the Docs.
+Find detailed documentation and updates in the [Docs](https://dep-scope.vercel.app/).
 
 ## License
 
