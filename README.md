@@ -4,10 +4,12 @@
 
 ## Features
 
-- **Dependency Graph Creation**: Visualize how modules within a project are interconnected in a graph format.
-- **Supports `import` and `require`**: Analyzes both ES modules and CommonJS structures.
-- **Dynamic Graph Adjustment**: Use sliders to adjust node size and link distance, allowing for flexible viewing.
-- **Detailed Module Information**: Hover over nodes to see detailed information, like module size and other attributes.
+- **JS, JSX, TS, TSX Support**: Works seamlessly with projects using JavaScript, JSX, TypeScript, and TSX. Visualizes module dependencies by analyzing `import` and `export` statements, providing a comprehensive graph view.
+- **Import & Require Support**: Analyzes both `import` and `require` statements to capture all dependencies across ES and CommonJS modules.
+- **Flexible Folder Input**: Input folders as an array to scan one or multiple directories, making it easy to analyze entire projects or specific subfolders.
+- **Dynamic Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight. Hover over a node to view precise module size information.
+- **Interactive Graph Customization**: Adjust node size and link distance with intuitive sliders. Supports drag-and-drop functionality to explore dependencies interactively.
+
 
 ## Preview
 
