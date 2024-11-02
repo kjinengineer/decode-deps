@@ -16,7 +16,6 @@ async function getNodeTree() {
   const response = await fetch(`http://localhost:${port}/track`);
   const data = await response.json();
   const { nodes, links } = data;
-  console.log(data);
   const width = window.innerWidth;
   const height = window.innerHeight;
 

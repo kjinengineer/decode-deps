@@ -133,33 +133,27 @@ export const getDependencies = (
 };
 
 export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
-  const visited = new Set<string>();
-  const nodes: TreeNode[] = [];
+  const nodesMap: { [key: string]: TreeNode } = {};
 
-  function buildNode(file: string): TreeNode {
-    if (visited.has(file)) return null;
-    visited.add(file);
-
-    const node: TreeNode = {
-      id: file,
-      children: [],
-      size: getFileSize(file),
-    };
-
-    if (deps[file]) {
-      node.children = deps[file]
-        .map((child) => buildNode(child))
-        .filter(Boolean);
+  const getNode = (id: string): TreeNode => {
+    if (!nodesMap[id]) {
+      nodesMap[id] = { id, children: [], size: getFileSize(id) };
     }
-    return node;
-  }
+    return nodesMap[id];
+  };
 
   for (const file in deps) {
-    const rootNode = buildNode(file);
-    if (rootNode) nodes.push(rootNode);
+    const parentNode = getNode(file);
+    deps[file].forEach((dependency) => {
+      const childNode = getNode(dependency);
+      if (!parentNode.children.includes(childNode)) {
+        parentNode.children.push(childNode);
+      }
+    });
   }
 
-  return nodes;
+  // 최상위 노드(부모가 없는 노드)만 반환
+  return Object.values(nodesMap).filter((node) => node.id in deps);
 };
 
 export const extractNodesAndLinks = (
