@@ -1,14 +1,9 @@
+let savedNodeSize = 30;
+let savedLinkDistance = 125;
+
 window.onload = () => {
-  let savedNodeSize = 30;
-  let savedLinkDistance = 125;
-
-  if (localStorage.getItem("nodeSize")) {
-    savedNodeSize = Number(localStorage.getItem("nodeSize"));
-  }
-
-  if (localStorage.getItem("linkDistance")) {
-    savedLinkDistance = Number(localStorage.getItem("linkDistance"));
-  }
+  savedNodeSize = Number(localStorage.getItem("nodeSize")) || 30;
+  savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
 
   document.getElementById("nodeSize").value = savedNodeSize.toString();
   document.getElementById("linkDistance").value = savedLinkDistance.toString();
