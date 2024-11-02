@@ -24,55 +24,65 @@ const extractImports = (filePath: string) => {
   const requireRegex = /require\(['"](.*?)['"]\)/g;
   const imports: string[] = [];
 
-  let match: RegExpExecArray;
+  let match: RegExpExecArray | null;
 
-  // import
   while ((match = importRegex.exec(content)) !== null) {
     let importPath = match[1];
     if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
       imports.push(importPath);
     } else {
-      if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
-        if (
-          fs.existsSync(
-            path.resolve(path.dirname(filePath), importPath + ".ts")
-          )
-        ) {
+      if (
+        !importPath.endsWith(".ts") &&
+        !importPath.endsWith(".js") &&
+        !importPath.endsWith(".tsx") &&
+        !importPath.endsWith(".jsx")
+      ) {
+        const resolvedPath = path.resolve(path.dirname(filePath), importPath);
+
+        if (fs.existsSync(resolvedPath + ".ts")) {
           importPath += ".ts";
-        } else if (
-          fs.existsSync(
-            path.resolve(path.dirname(filePath), importPath + ".js")
-          )
-        ) {
+        } else if (fs.existsSync(resolvedPath + ".js")) {
           importPath += ".js";
+        } else if (fs.existsSync(resolvedPath + ".tsx")) {
+          importPath += ".tsx";
+        } else if (fs.existsSync(resolvedPath + ".jsx")) {
+          importPath += ".jsx";
         }
       }
-      imports.push(path.join(path.dirname(filePath), importPath));
+
+      if (!importPath.endsWith(".d.ts") && !importPath.endsWith(".d.tsx")) {
+        imports.push(path.join(path.dirname(filePath), importPath));
+      }
     }
   }
 
-  // require
   while ((match = requireRegex.exec(content)) !== null) {
     let importPath = match[1];
     if (!importPath.startsWith(".") && !importPath.startsWith("/")) {
       imports.push(importPath);
     } else {
-      if (!importPath.endsWith(".ts") && !importPath.endsWith(".js")) {
-        if (
-          fs.existsSync(
-            path.resolve(path.dirname(filePath), importPath + ".ts")
-          )
-        ) {
+      if (
+        !importPath.endsWith(".ts") &&
+        !importPath.endsWith(".js") &&
+        !importPath.endsWith(".tsx") &&
+        !importPath.endsWith(".jsx")
+      ) {
+        const resolvedPath = path.resolve(path.dirname(filePath), importPath);
+
+        if (fs.existsSync(resolvedPath + ".ts")) {
           importPath += ".ts";
-        } else if (
-          fs.existsSync(
-            path.resolve(path.dirname(filePath), importPath + ".js")
-          )
-        ) {
+        } else if (fs.existsSync(resolvedPath + ".js")) {
           importPath += ".js";
+        } else if (fs.existsSync(resolvedPath + ".tsx")) {
+          importPath += ".tsx";
+        } else if (fs.existsSync(resolvedPath + ".jsx")) {
+          importPath += ".jsx";
         }
       }
-      imports.push(path.join(path.dirname(filePath), importPath));
+
+      if (!importPath.endsWith(".d.ts") && !importPath.endsWith(".d.tsx")) {
+        imports.push(path.join(path.dirname(filePath), importPath));
+      }
     }
   }
 
@@ -102,11 +112,15 @@ export const getDependencies = (
 
       if (stats.isDirectory()) {
         traverseDirectory(filePath);
-      } else if (
-        stats.isFile() &&
-        (file.endsWith(".ts") || file.endsWith(".js"))
-      ) {
-        dependencies[filePath] = extractImports(filePath);
+      } else if (!file.endsWith(".d.ts") && !file.endsWith(".d.tsx")) {
+        if (
+          stats.isFile() &&
+          (file.endsWith(".ts") ||
+            file.endsWith(".js") ||
+            file.endsWith(".tsx") ||
+            file.endsWith(".jsx"))
+        )
+          dependencies[filePath] = extractImports(filePath);
       }
     });
   }
@@ -156,7 +170,7 @@ export const extractNodesAndLinks = (
 } => {
   const nodes: NodeType[] = [];
   const links: LinkType[] = [];
-  const visited = new Set<string>();
+  const visited = [];
 
   function getNodes(node: TreeNode) {
     const newNode: NodeType = {
@@ -165,8 +179,8 @@ export const extractNodesAndLinks = (
       children: node.children,
     };
 
-    if (!visited.has(newNode.id)) {
-      visited.add(newNode.id);
+    if (!visited.includes(newNode.id)) {
+      visited.push(newNode.id);
       nodes.push(newNode);
       if (node.children) {
         node.children.forEach((child) => {
