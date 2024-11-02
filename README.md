@@ -12,7 +12,7 @@
 
 ## Preview
 
-![example](./public/example.png "example")
+![example](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl4UxR%2FbtsKtpPwTlj%2F2hgaxyxJm4yX3wKsxFtOa0%2Fimg.png "example")
 
 ## Installation
 
@@ -50,7 +50,7 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 
 ## Docs
 
-Find detailed documentation and updates in the <a href="https://dep-scope.vercel.app/" target="_blank">Docs</a>.
+Find detailed documentation and updates in the [Docs](https://dep-scope.vercel.app/).
 
 ## License
 
