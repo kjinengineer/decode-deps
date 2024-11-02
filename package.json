@@ -17,8 +17,13 @@
     "typescript": "^5.6.3"
   },
   "author": {
-    "name": "zn"
+    "name": "oneparticle"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oneparticle/dep-scope"
+  },
+  "homepage": "https://dep-scope.vercel.app/",
   "license": "MIT",
   "description": "Dependency Graph",
   "keywords": [
