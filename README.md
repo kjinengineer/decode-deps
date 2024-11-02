@@ -1,6 +1,6 @@
-# Dep-Track
+# DepScope
 
-**Dep-Track** is a module that analyzes and visualizes module dependencies in JavaScript projects. It identifies interdependent modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
+**DepScope** is a module that analyzes and visualizes module dependencies in JavaScript projects. It identifies interdependent modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
 ## Features
 
@@ -10,7 +10,6 @@
 - **Dynamic Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight. Hover over a node to view precise module size information.
 - **Interactive Graph Customization**: Adjust node size and link distance with intuitive sliders. Supports drag-and-drop functionality to explore dependencies interactively.
 
-
 ## Preview
 
 (Picture)
@@ -18,9 +17,9 @@
 ## Installation
 
 ```bash
-npm install dep-track
+npm install dep-scope
 # or
-yarn add dep-track
+yarn add dep-scope
 ```
 
 ## How to Use
@@ -28,13 +27,13 @@ yarn add dep-track
 After installing, run the module with `npx` by specifying the folder names to analyze. Input values should be in array format. To analyze files within the `./src` folder, use:
 
 ```bash
-npx dep-track '["./src"]'
+npx dep-scope '["./src"]'
 ```
 
 To explore multiple folders, specify them as follows:
 
 ```bash
-npx dep-track '["./src", "./dist"]'
+npx dep-scope '["./src", "./dist"]'
 ```
 
 After running the command, you can view the results at `localhost:5001`.
