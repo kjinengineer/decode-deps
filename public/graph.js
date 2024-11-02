@@ -16,7 +16,7 @@ async function getNodeTree() {
   const response = await fetch(`http://localhost:${port}/track`);
   const data = await response.json();
   const { nodes, links } = data;
-
+  console.log(data);
   const width = window.innerWidth;
   const height = window.innerHeight;
 
@@ -81,9 +81,9 @@ async function getNodeTree() {
     .text((d) => d.id)
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
+    .attr("class", "node-text")
     .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle")
-    .style("font-size", "12px");
+    .attr("dominant-baseline", "middle");
 
   const simulation = d3
     .forceSimulation(nodes)

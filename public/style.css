@@ -33,8 +33,9 @@ svg {
   font-weight: 300;
 }
 
-text {
+.node-text {
   user-select: none;
+  font-size: 12px;
 }
 
 .controls {
