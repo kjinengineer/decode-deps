@@ -94,12 +94,13 @@ async function getNodeTree() {
         .id((d) => d.id)
         .distance(savedLinkDistance)
     )
-    .force("charge", d3.forceManyBody().strength(-50))
+    .force("charge", d3.forceManyBody().strength(-100))
     .force(
       "collide",
       d3.forceCollide().radius((d) => d.size + 5)
     )
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .on("tick", ticked);
 
   simulation.on("tick", () => {
     link
@@ -128,6 +129,27 @@ async function getNodeTree() {
       .attr("y", (d) => d.y);
   });
 
+  function ticked() {
+    link
+      .attr("x1", (d) => d.source.x)
+      .attr("y1", (d) => d.source.y)
+      .attr("x2", (d) => d.target.x)
+      .attr("y2", (d) => d.target.y);
+
+    node
+      .attr("cx", (d) => {
+        if (d.x - d.size < 0 || d.x + d.size > width) {
+          d.vx = -d.vx * 0.5;
+        }
+        return d.x;
+      })
+      .attr("cy", (d) => {
+        if (d.y - d.size < 0 || d.y + d.size > height) {
+          d.vy = -d.vy * 0.5;
+        }
+        return d.y;
+      });
+  }
   function dragStarted(event, d) {
     if (!event.active) simulation.alphaTarget(0.2).restart();
     d.fx = d.x;
