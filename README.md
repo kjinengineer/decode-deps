@@ -12,19 +12,25 @@
 
 ## Preview
 
-(Picture)
+![example](./public/example.png "example")
 
 ## Installation
 
 ```bash
 npm install dep-scope
-# or
+```
+
+or
+
+```bash
 yarn add dep-scope
 ```
 
-## How to Use
+## How to use (with example)
 
-After installing, run the module with `npx` by specifying the folder names to analyze. Input values should be in array format. To analyze files within the `./src` folder, use:
+**Step 1.** Install `dep-scope`.
+
+**Step 2.** Run the command, `npx dep-scope` with input array. You can put folder names that you want to scan. For example, to analyze files within the `./src` folder, use:
 
 ```bash
 npx dep-scope '["./src"]'
@@ -36,7 +42,7 @@ To explore multiple folders, specify them as follows:
 npx dep-scope '["./src", "./dist"]'
 ```
 
-After running the command, you can view the results at `localhost:5001`.
+**Step 3.** After running the command, you can see the results at `localhost:5001`.
 
 ## Contributing
 
