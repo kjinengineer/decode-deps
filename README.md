@@ -1,6 +1,6 @@
 # DepScope
 
-**DepScope** is a module that analyzes and visualizes module dependencies in JavaScript projects. It identifies interdependent modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
+**DepScope** is a module that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
 ## Features
 
@@ -12,7 +12,7 @@
 
 ## Preview
 
-![example](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl4UxR%2FbtsKtpPwTlj%2F2hgaxyxJm4yX3wKsxFtOa0%2Fimg.png "example")
+![example](https://blog.kakaocdn.net/dn/BHp2P/btsKvq0aO2P/m6pgTJ1ljujfHVfbzcZTC1/img.gif "example")
 
 ## Installation
 
