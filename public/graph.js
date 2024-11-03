@@ -93,7 +93,7 @@ async function getNodeTree() {
         .id((d) => d.id)
         .distance(savedLinkDistance)
     )
-    .force("charge", d3.forceManyBody().strength(-100))
+    // .force("charge", d3.forceManyBody().strength(-100))
     .force(
       "collide",
       d3.forceCollide().radius((d) => d.size + 5)
@@ -185,4 +185,18 @@ async function getNodeTree() {
       );
       simulation.alpha(1).restart();
     });
+
+  applyInitialCharge(simulation);
+}
+
+function applyInitialCharge(simulation) {
+  simulation
+    .force("charge", d3.forceManyBody().strength(-200))
+    .alpha(1)
+    .restart();
+
+  setTimeout(() => {
+    simulation.force("charge", null);
+    simulation.alphaTarget(0);
+  }, 2000);
 }
