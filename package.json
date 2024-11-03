@@ -7,7 +7,7 @@
     "build": "rm -fr dist && tsc --project tsconfig.json"
   },
   "bin": {
-    "decode": "./bin/cli.js"
+    "decode-deps": "./bin/cli.js"
   },
   "dependencies": {
     "express": "^4.21.1"
