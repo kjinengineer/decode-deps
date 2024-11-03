@@ -17,11 +17,11 @@
     "typescript": "^5.6.3"
   },
   "author": {
-    "name": "oneparticle"
+    "name": "jnoncode"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/oneparticle/dep-scope"
+    "url": "https://github.com/jnoncode/dep-scope"
   },
   "homepage": "https://dep-scope.vercel.app/",
   "license": "MIT",
