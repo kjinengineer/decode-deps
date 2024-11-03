@@ -1,6 +1,6 @@
-# DepScope
+# DecodeDeps
 
-**DepScope** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
+**DecodeDeps** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
 ## Features
 
@@ -12,34 +12,34 @@
 
 ## Preview
 
-![example](https://blog.kakaocdn.net/dn/BHp2P/btsKvq0aO2P/m6pgTJ1ljujfHVfbzcZTC1/img.gif "example")
+![example](https://blog.kakaocdn.net/dn/yJ4aw/btsKuI1usiC/Vz6FOaxntAr6cehdlPSxD1/img.gif "example")
 
 ## Installation
 
 ```bash
-npm install dep-scope
+npm install decode-deps
 ```
 
 or
 
 ```bash
-yarn add dep-scope
+yarn add decode-deps
 ```
 
 ## How to use (with example)
 
-**Step 1.** Install `dep-scope`.
+**Step 1.** Install `decode-deps`.
 
-**Step 2.** Run the command, `npx dep-scope` with input array. You can put folder names that you want to scan. For example, to analyze files within the `./src` folder, use:
+**Step 2.** Run the command, `npx decode-deps` with input array. You can put folder names that you want to scan. For example, to analyze files within the `./src` folder, use:
 
 ```bash
-npx dep-scope '["./src"]'
+npx decode-deps '["./src"]'
 ```
 
 To explore multiple folders, specify them as follows:
 
 ```bash
-npx dep-scope '["./src", "./dist"]'
+npx decode-deps '["./src", "./dist"]'
 ```
 
 **Step 3.** After running the command, you can see the results at `localhost:5001`.
@@ -50,7 +50,7 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 
 ## Docs
 
-Find detailed documentation and updates in the [Docs](https://dep-scope.vercel.app/).
+Find detailed documentation and updates in the [Docs](https://decode-deps.vercel.app/).
 
 ## License
 

@@ -1,5 +1,5 @@
 {
-  "name": "dep-scope",
+  "name": "decode-deps",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "rm -fr dist && tsc --project tsconfig.json"
   },
   "bin": {
-    "dep-scope": "./bin/cli.js"
+    "decode": "./bin/cli.js"
   },
   "dependencies": {
     "express": "^4.21.1"
@@ -21,9 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jnoncode/dep-scope"
+    "url": "https://github.com/jnoncode/decode-deps"
   },
-  "homepage": "https://dep-scope.vercel.app/",
+  "homepage": "https://decode-deps.vercel.app",
   "license": "MIT",
   "description": "Dependency Graph",
   "keywords": [
