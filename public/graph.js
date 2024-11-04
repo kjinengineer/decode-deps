@@ -1,13 +1,10 @@
+import { maxNodes, port, width, height } from "./graphConstant.js";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
-  height,
-  maxNodes,
-  port,
   ticked,
-  width,
 } from "./graphUtil.js";
 
 let savedNodeSize = 30;
