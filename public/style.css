@@ -30,13 +30,13 @@ svg {
   pointer-events: none;
   visibility: hidden;
   font-size: 14px;
-  font-weight: 300;
 }
 
 .node-text {
   user-select: none;
   pointer-events: none;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .controls {

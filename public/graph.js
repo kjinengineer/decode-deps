@@ -54,7 +54,11 @@ async function getNodeTree() {
     .attr("stroke-width", 1)
     .style("stroke", "#a1a1aa")
     .on("mouseover", function (event, d) {
-      tooltip.style("visibility", "visible").text(`${d.size} bytes`);
+      tooltip.style("visibility", "visible").html(() => {
+        const words = `<strong>${d.id}</strong>`; // 굵게 스타일 적용
+        const size = d.size;
+        return `${words}<br>${size} bytes`;
+      });
     })
     .on("mousemove", function (event) {
       tooltip
@@ -78,7 +82,11 @@ async function getNodeTree() {
     .data(nodes)
     .enter()
     .append("text")
-    .text((d) => d.id)
+    .append("tspan")
+    .text((d) => {
+      const words = d.id.split("/");
+      return words[words.length - 1];
+    })
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
     .attr("class", "node-text")
@@ -94,7 +102,7 @@ async function getNodeTree() {
         .id((d) => d.id)
         .distance(savedLinkDistance)
     )
-    // .force("charge", d3.forceManyBody().strength(-100))
+
     .force(
       "collide",
       d3.forceCollide().radius((d) => d.size + 5)
