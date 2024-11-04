@@ -1,4 +1,4 @@
-import { maxNodes, port, width, height } from "./graphConstant.js";
+import { width, height } from "./graphConstant.js";
 
 export function applyInitialCharge(d3, simulation) {
   simulation

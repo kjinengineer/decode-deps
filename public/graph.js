@@ -36,6 +36,19 @@ async function getNodeTree() {
 
   const svg = d3.select("svg");
 
+  const zoom = d3
+    .zoom()
+    .scaleExtent([1, 40])
+    .translateExtent([
+      [-100, -100],
+      [width + 90, height + 100],
+    ])
+    .on("zoom", zoomed);
+
+  const g = svg.append("g");
+
+  svg.call(zoom);
+
   const tooltip = d3
     .select("body")
     .append("div")
@@ -47,7 +60,7 @@ async function getNodeTree() {
     .domain([minModuleSize, maxModuleSize])
     .range(["#fde68a", "#f59e0b"]);
 
-  const link = svg
+  const link = g
     .append("g")
     .selectAll("line")
     .data(links)
@@ -55,7 +68,7 @@ async function getNodeTree() {
     .append("line")
     .style("stroke", "#a1a1aa");
 
-  const node = svg
+  const node = g
     .append("g")
     .selectAll("circle")
     .data(nodes)
@@ -88,9 +101,7 @@ async function getNodeTree() {
         .on("end", (event, d) => dragEnded(event, d, simulation))
     );
 
-  svg
-    .append("g")
-    .selectAll("text")
+  g.selectAll("text")
     .data(nodes)
     .enter()
     .append("text")
@@ -104,6 +115,10 @@ async function getNodeTree() {
     .attr("class", "node-text")
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "middle");
+
+  function zoomed(event) {
+    g.attr("transform", event.transform);
+  }
 
   const simulation = d3
     .forceSimulation(nodes)
