@@ -41,7 +41,7 @@ async function getNodeTree() {
     .data(links)
     .enter()
     .append("line")
-    .style("stroke", "#d1d5db");
+    .style("stroke", "#a1a1aa");
 
   const node = svg
     .append("g")
@@ -52,6 +52,7 @@ async function getNodeTree() {
     .attr("r", savedNodeSize)
     .attr("fill", (d) => colorScale(d.size))
     .attr("stroke-width", 1)
+    .style("stroke", "#a1a1aa")
     .on("mouseover", function (event, d) {
       tooltip.style("visibility", "visible").text(`${d.size} bytes`);
     })
