@@ -35,7 +35,6 @@ svg {
 .node-text {
   user-select: none;
   pointer-events: none;
-  font-size: 14px;
 }
 
 .controls {

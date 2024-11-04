@@ -9,13 +9,16 @@ import {
 
 let savedNodeSize = 30;
 let savedLinkDistance = 125;
+let savedFontSize = 12;
 
 window.onload = () => {
   savedNodeSize = Number(localStorage.getItem("nodeSize")) || 30;
   savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
+  savedFontSize = Number(localStorage.getItem("fontSize")) || 125;
 
   document.getElementById("nodeSize").value = savedNodeSize.toString();
   document.getElementById("linkDistance").value = savedLinkDistance.toString();
+  document.getElementById("fontSize").value = savedFontSize.toString();
   getNodeTree();
 };
 
@@ -114,7 +117,8 @@ async function getNodeTree() {
     .attr("y", (d) => d.y)
     .attr("class", "node-text")
     .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle");
+    .attr("dominant-baseline", "middle")
+    .style("font-size", savedFontSize);
 
   function zoomed(event) {
     g.attr("transform", event.transform);
@@ -184,6 +188,14 @@ async function getNodeTree() {
       );
       simulation.alpha(1).restart();
     });
+
+  document.getElementById("fontSize")?.addEventListener("input", (event) => {
+    const newFontSize = +event.target.value;
+    localStorage.setItem("fontSize", String(newFontSize));
+
+    d3.selectAll(".node-text").style("font-size", `${newFontSize}px`);
+    simulation.alpha(1).restart();
+  });
 
   applyInitialCharge(d3, simulation);
 }
