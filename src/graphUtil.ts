@@ -12,7 +12,7 @@ export function applyInitialCharge(d3, simulation) {
   }, 2000);
 }
 
-export function ticked() {
+export function ticked(link, node) {
   link
     .attr("x1", (d) => d.source.x)
     .attr("y1", (d) => d.source.y)

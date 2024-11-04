@@ -1,11 +1,13 @@
-import { maxNodes, port, width, height } from "./graphConstant.js";
+import * as d3 from "d3";
+
+import { maxNodes, port, width, height } from "./graphConstant";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
   ticked,
-} from "./graphUtil.js";
+} from "./graphUtil";
 
 let savedNodeSize = 30;
 let savedLinkDistance = 125;
@@ -16,9 +18,12 @@ window.onload = () => {
   savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
   savedFontSize = Number(localStorage.getItem("fontSize")) || 125;
 
-  document.getElementById("nodeSize").value = savedNodeSize.toString();
-  document.getElementById("linkDistance").value = savedLinkDistance.toString();
-  document.getElementById("fontSize").value = savedFontSize.toString();
+  (document.getElementById("nodeSize") as HTMLInputElement).value =
+    savedNodeSize.toString();
+  (document.getElementById("linkDistance") as HTMLInputElement).value =
+    savedLinkDistance.toString();
+  (document.getElementById("fontSize") as HTMLInputElement).value =
+    savedFontSize.toString();
   getNodeTree();
 };
 
@@ -138,7 +143,7 @@ async function getNodeTree() {
       d3.forceCollide().radius((d) => d.size + 5)
     )
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .on("tick", ticked);
+    .on("tick", ticked(link, node));
 
   simulation.on("tick", () => {
     link
@@ -168,7 +173,7 @@ async function getNodeTree() {
   });
 
   document.getElementById("nodeSize")?.addEventListener("input", (event) => {
-    const newSize = +event.target.value;
+    const newSize = +(event.target as HTMLInputElement).value;
     localStorage.setItem("nodeSize", String(newSize));
     node.attr("r", newSize);
     simulation.alpha(1).restart();
@@ -177,7 +182,7 @@ async function getNodeTree() {
   document
     .getElementById("linkDistance")
     ?.addEventListener("input", (event) => {
-      const newDistance = +event.target.value;
+      const newDistance = +(event.target as HTMLInputElement).value;
       localStorage.setItem("linkDistance", String(newDistance));
       simulation.force(
         "link",
@@ -190,7 +195,7 @@ async function getNodeTree() {
     });
 
   document.getElementById("fontSize")?.addEventListener("input", (event) => {
-    const newFontSize = +event.target.value;
+    const newFontSize = +(event.target as HTMLInputElement).value;
     localStorage.setItem("fontSize", String(newFontSize));
 
     d3.selectAll(".node-text").style("font-size", `${newFontSize}px`);
