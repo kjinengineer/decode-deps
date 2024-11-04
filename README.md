@@ -56,13 +56,20 @@ npx decode-deps '["./src", "./dist"]'
 
 **Step 3.** After running the command, you can see the results at `localhost:5001`.
 
-## 🛠 Contributing
+## 💬 Contributing
 
 If you'd like to contribute, feel free to submit a pull request or open an issue. Feedback to improve the project is always welcome!
 
 ## 📚 Docs
 
 Find detailed documentation and updates in the [Docs](https://decode-deps.vercel.app/).
+
+## 🛠 Planned Updates
+The following features are planned for future updates:
+- Circular Dependency Detection
+- Duplicate Dependency Tracking
+- File/Folder Search Function
+- Unused Code Detection
 
 ## 📝 License
 
