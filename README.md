@@ -24,7 +24,17 @@
 
 ## 👀 Preview
 
-![example](https://blog.kakaocdn.net/dn/yJ4aw/btsKuI1usiC/Vz6FOaxntAr6cehdlPSxD1/img.gif "example")
+Prepare the project.
+
+![project](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMLYe5%2FbtsKwt4gA1g%2F3W1k70jiJzRERGuBrLDik0%2Fimg.png "project")
+
+Enter the command.
+
+![command](https://blog.kakaocdn.net/dn/kOvD5/btsKw0tGTDb/wMqKSgaUXKEWht5YlCNkLK/img.gif "command")
+
+Check the results on port 5001.
+
+![result](https://blog.kakaocdn.net/dn/ciGNzZ/btsKvgZc0Fi/PO2mGfz1BfO0Rbcifakx41/img.gif "result")
 
 ## 📥 Installation
 
