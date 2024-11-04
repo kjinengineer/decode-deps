@@ -9,12 +9,12 @@ import {
   ticked,
 } from "./graphUtil";
 
-let savedNodeSize = 30;
+let savedNodeSize = 20;
 let savedLinkDistance = 125;
 let savedFontSize = 12;
 
 window.onload = () => {
-  savedNodeSize = Number(localStorage.getItem("nodeSize")) || 30;
+  savedNodeSize = Number(localStorage.getItem("nodeSize")) || 20;
   savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
   savedFontSize = Number(localStorage.getItem("fontSize")) || 12;
 
