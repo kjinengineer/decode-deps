@@ -24,7 +24,7 @@
 
 ## 👀 Preview
 
-Prepare the project.
+Prepare your project.
 
 ![project](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMLYe5%2FbtsKwt4gA1g%2F3W1k70jiJzRERGuBrLDik0%2Fimg.png "project")
 
@@ -48,7 +48,7 @@ or
 yarn add decode-deps
 ```
 
-## 💡 How to use (with example)
+## 💡 How to use
 
 **Step 1.** Install `decode-deps`.
 
@@ -75,7 +75,7 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 Find detailed documentation and updates in the [Docs](https://decode-deps.vercel.app/).
 
 ## 🛠 Planned Updates
-The following features are planned for future updates:
+The following features are planned for **future updates**:
 - Circular Dependency Detection
 - Duplicate Dependency Tracking
 - File/Folder Search Function
