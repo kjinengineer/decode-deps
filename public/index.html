@@ -17,9 +17,9 @@
           <input
             type="range"
             id="nodeSize"
-            min="10"
+            min="5"
             max="50"
-            value='${localStorage.getItem("nodeSize") || 30}'
+            value='${localStorage.getItem("nodeSize") || 20}'
           />
         </div>
         <div class="bar">
@@ -27,9 +27,19 @@
           <input
             type="range"
             id="linkDistance"
-            min="50"
+            min="10"
             max="200"
             value='${localStorage.getItem("linkDistance") || 125}'
+          />
+        </div>
+        <div class="bar">
+          <label for="fontSize">Font Size</label>
+          <input
+            type="range"
+            id="fontSize"
+            min="8"
+            max="30"
+            value='${localStorage.getItem("fontSize") || 12}'
           />
         </div>
       </div>

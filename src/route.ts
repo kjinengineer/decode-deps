@@ -9,10 +9,9 @@ export default function startDepTrack(sourceDir: string[]) {
   const _dirname = dirname(_filename);
 
   const app = express();
-  app.use(express.static(path.join(_dirname, "../public")));
-
+  app.use(express.static(path.join(_dirname, "/")));
   app.get("/", (req, res) => {
-    res.sendFile(path.join(_dirname, "public", "index.html"));
+    res.sendFile(path.join(_dirname, "/", "index.html"));
   });
 
   app.get("/track", (req, res) => {
