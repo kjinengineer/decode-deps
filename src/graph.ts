@@ -140,9 +140,10 @@ async function getNodeTree() {
     )
     .force(
       "collide",
-      d3.forceCollide().radius((d) => d.size + 5)
+      d3.forceCollide().radius((d) => d.size + 25)
     )
     .force("center", d3.forceCenter(width / 2, height / 2))
+    .alphaDecay(0.02)
     .on("tick", ticked(link, node));
 
   simulation.on("tick", () => {

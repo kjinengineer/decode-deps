@@ -1,8 +1,8 @@
-import { width, height } from "./graphConstant.js";
+import { width, height } from "./graphConstant";
 
 export function applyInitialCharge(d3, simulation) {
   simulation
-    .force("charge", d3.forceManyBody().strength(-200))
+    .force("charge", d3.forceManyBody().strength(-500))
     .alpha(1)
     .restart();
 
