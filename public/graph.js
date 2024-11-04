@@ -19,6 +19,15 @@ async function getNodeTree() {
   const width = window.innerWidth;
   const height = window.innerHeight;
 
+  const maxNodes = 500;
+
+  if (nodes.length > maxNodes) {
+    alert(
+      `The current node count is ${nodes.length}, which exceeds the maximum of ${maxNodes} nodes.\nPlease further subdivide your folders for better visualization.`
+    );
+    return;
+  }
+
   const sizeArray = nodes.map((d) => d.size);
   const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
