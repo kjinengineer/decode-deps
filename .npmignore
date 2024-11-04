@@ -4,3 +4,4 @@ src
 .gitignore
 tsconfig.json
 yarn.lock
+public

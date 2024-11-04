@@ -16,7 +16,7 @@ let savedFontSize = 12;
 window.onload = () => {
   savedNodeSize = Number(localStorage.getItem("nodeSize")) || 30;
   savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
-  savedFontSize = Number(localStorage.getItem("fontSize")) || 125;
+  savedFontSize = Number(localStorage.getItem("fontSize")) || 12;
 
   (document.getElementById("nodeSize") as HTMLInputElement).value =
     savedNodeSize.toString();
@@ -46,7 +46,7 @@ async function getNodeTree() {
 
   const zoom = d3
     .zoom()
-    .scaleExtent([1, 40])
+    .scaleExtent([0.1, 30])
     .translateExtent([
       [-100, -100],
       [width + 90, height + 100],
