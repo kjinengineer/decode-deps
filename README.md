@@ -9,13 +9,13 @@
 - Fix Circular Dependency Error.
 - Update new UI about Circulr Dependency Error.
 
-## 🌟 Features
+## 🌟 Key Features
 
-- **JS, JSX, TS, TSX Support**: Works seamlessly with projects using JavaScript, JSX, TypeScript, and TSX. Visualizes module dependencies by analyzing `import` and `export` statements, providing a comprehensive graph view.
-- **Import & Require Support**: Analyzes both `import` and `require` statements to capture all dependencies across ES and CommonJS modules.
-- **Flexible Folder Input**: Input folders as an array to scan one or multiple directories, making it easy to analyze entire projects or specific subfolders.
-- **Dynamic Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight. Hover over a node to view precise module size information.
-- **Interactive Graph Customization**: Adjust node size and link distance with intuitive sliders. Supports drag-and-drop functionality to explore dependencies interactively.
+- **For js, jsx, ts and tsx files**: Visualizes module dependencies by analyzing `import` and `require` statements, providing a graph view.
+- **Multiple folders**: Make it easy to analyze entire projects or specific subfolders.
+- **Detect circular dependencies**: Automatically identifies circular dependencies within your modules.
+- **Various Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight.
+- **Interactive Graph**: Navigate and explore the dependency graph with zoom and pan features, as well as adjustable node sizes and link distances, providing a fully interactive visualization
 
 ## 👀 Preview
 
