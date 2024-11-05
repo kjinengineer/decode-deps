@@ -43,7 +43,24 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 20px 24px;
+  width: 240px;
+  height: 70px;
+  margin: 16px 20px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.warning {
+  z-index: 100;
+  background-color: #f3f4f6;
+  position: absolute;
+  width: 240px;
+  top: 80px;
+  right: 0;
+  margin: 20px 0px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -52,7 +69,7 @@ svg {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3px 6px;
+  margin: 1px 6px;
 }
 
 .bar label {

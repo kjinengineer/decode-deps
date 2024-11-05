@@ -29,9 +29,11 @@ export const extractNodesAndLinks = (
 ): {
   nodes: NodeType[];
   links: LinkType[];
+  warning: [string, string][];
 } => {
   const nodes: NodeType[] = [];
   const links: LinkType[] = [];
+  const warning: [string, string][] = [];
   const visited = [];
 
   function getNodes(node: TreeNode) {
@@ -55,19 +57,23 @@ export const extractNodesAndLinks = (
 
   trees.forEach((tree) => getNodes(tree));
 
-  return { nodes, links };
+  return { nodes, links, warning };
 };
 
-export function detectCircularDeps(links: LinkType[]): string[] {
+export function detectCircularDeps(links: LinkType[]): [string, string][] {
   const visited = new Set<string>();
   const stack = new Set<string>();
-  const circularNodes: string[] = [];
+  const circularDependencies: [string, string][] = [];
 
   function visit(node: string): boolean {
     if (stack.has(node)) {
-      circularNodes.push(node);
+      const circularPath = Array.from(stack).concat(node);
+      for (let i = 0; i < circularPath.length - 1; i++) {
+        circularDependencies.push([circularPath[i], circularPath[i + 1]]);
+      }
       return true;
     }
+
     if (visited.has(node)) return false;
 
     visited.add(node);
@@ -75,9 +81,7 @@ export function detectCircularDeps(links: LinkType[]): string[] {
 
     for (const link of links) {
       if (link.source === node) {
-        if (visit(link.target)) {
-          return true;
-        }
+        visit(link.target);
       }
     }
 
@@ -91,7 +95,7 @@ export function detectCircularDeps(links: LinkType[]): string[] {
     }
   }
 
-  return circularNodes;
+  return circularDependencies;
 }
 
 export function removeCircularDeps(obj: any) {
@@ -114,4 +118,25 @@ export function removeCircularDeps(obj: any) {
   }
 
   return recurse(obj);
+}
+
+export function removeDuplicateCircularDeps(
+  dependencies: [string, string][]
+): [string, string][] {
+  const uniqueDeps = new Set<string>();
+  const result: [string, string][] = [];
+
+  dependencies.forEach((pair) => {
+    // 각 쌍을 정렬하여 중복 체크 가능하게 만듦
+    const sortedPair = pair.slice().sort();
+    const key = `${sortedPair[0]}-${sortedPair[1]}`;
+
+    // 이미 존재하지 않는 경우에만 추가
+    if (!uniqueDeps.has(key)) {
+      uniqueDeps.add(key);
+      result.push(pair);
+    }
+  });
+
+  return result;
 }

@@ -6,6 +6,7 @@ import {
   detectCircularDeps,
   extractNodesAndLinks,
   removeCircularDeps,
+  removeDuplicateCircularDeps,
 } from "./utils/depUtils";
 import { getDependencies } from "./utils/fileUtils";
 import { port } from "./constant";
@@ -15,11 +16,11 @@ export default function startDepTrack(sourceDir: string[]) {
   const _dirname = dirname(_filename);
 
   const app = express();
-  app.use(express.static(path.join(_dirname, "/"))); // for publish
-  // app.use(express.static(path.join(_dirname, "../public"))); // dev
+  // app.use(express.static(path.join(_dirname, "/"))); // for publish
+  app.use(express.static(path.join(_dirname, "../public"))); // dev
   app.get("/", (req, res) => {
-    // res.sendFile(path.join(_dirname, "public", "index.html")); // dev
-    res.sendFile(path.join(_dirname, "/", "index.html")); // for publish
+    res.sendFile(path.join(_dirname, "public", "index.html")); // dev
+    // res.sendFile(path.join(_dirname, "/", "index.html")); // for publish
   });
 
   app.get("/track", (req, res) => {
@@ -28,10 +29,13 @@ export default function startDepTrack(sourceDir: string[]) {
     const resultData = extractNodesAndLinks(dependencyTree);
 
     const circularNodes = detectCircularDeps(resultData.links);
-    if (circularNodes.length > 0) {
-      console.warn("Circular dependency detected in nodes:", circularNodes);
-    }
+    const uniqueCircularNodes = removeDuplicateCircularDeps(circularNodes);
 
+    if (uniqueCircularNodes.length > 0) {
+      for (let el of uniqueCircularNodes) {
+        resultData.warning.push(el);
+      }
+    }
     const safeResultData = removeCircularDeps(resultData);
     res.json(safeResultData);
   });

@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import { maxNodes, port, width, height } from "./constant";
+import { maxNodes, port } from "./constant";
 import {
   applyInitialCharge,
   dragEnded,
@@ -12,6 +12,9 @@ import {
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
 let savedFontSize = 12;
+
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 window.onload = () => {
   savedNodeSize = Number(localStorage.getItem("nodeSize")) || 20;
