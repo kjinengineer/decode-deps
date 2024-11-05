@@ -1,4 +1,4 @@
-import { width, height } from "./graphConstant";
+import { width, height } from "../constant";
 
 export function applyInitialCharge(d3, simulation) {
   simulation

@@ -3,14 +3,14 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import {
   buildTree,
-  detectCircularReferences,
+  detectCircularDeps,
   extractNodesAndLinks,
-  getDependencies,
-  removeCircularReferences,
-} from "./utils";
+  removeCircularDeps,
+} from "./utils/depUtils";
+import { getDependencies } from "./utils/fileUtils";
+import { port } from "./constant";
 
 export default function startDepTrack(sourceDir: string[]) {
-  const port = 5001;
   const _filename = fileURLToPath(import.meta.url);
   const _dirname = dirname(_filename);
 
@@ -27,14 +27,13 @@ export default function startDepTrack(sourceDir: string[]) {
     const dependencyTree = buildTree(dependencies);
     const resultData = extractNodesAndLinks(dependencyTree);
 
-    const circularNodes = detectCircularReferences(resultData.links);
+    const circularNodes = detectCircularDeps(resultData.links);
     if (circularNodes.length > 0) {
       console.warn("Circular dependency detected in nodes:", circularNodes);
     }
 
-    const safeResultData = removeCircularReferences(resultData);
+    const safeResultData = removeCircularDeps(resultData);
     res.json(safeResultData);
-    // res.json(resultData);
   });
 
   app.listen(port, () => {

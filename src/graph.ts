@@ -1,13 +1,13 @@
 import * as d3 from "d3";
 
-import { maxNodes, port, width, height } from "./graphConstant";
+import { maxNodes, port, width, height } from "./constant";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
   ticked,
-} from "./graphUtil";
+} from "./utils/graphUtil";
 
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
