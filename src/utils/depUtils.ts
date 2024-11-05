@@ -127,11 +127,9 @@ export function removeDuplicateCircularDeps(
   const result: [string, string][] = [];
 
   dependencies.forEach((pair) => {
-    // 각 쌍을 정렬하여 중복 체크 가능하게 만듦
     const sortedPair = pair.slice().sort();
     const key = `${sortedPair[0]}-${sortedPair[1]}`;
 
-    // 이미 존재하지 않는 경우에만 추가
     if (!uniqueDeps.has(key)) {
       uniqueDeps.add(key);
       result.push(pair);

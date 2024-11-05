@@ -14,9 +14,6 @@ function showAlert(message) {
   const warning = document.querySelector(".warning") as HTMLElement;
   const warningBox = document.querySelector(".warningBox");
 
-  if (warningBox instanceof HTMLElement) {
-    warning.style.display = "inline-block";
-  }
-
+  warning.style.display = "inline-block";
   warningBox.innerHTML = message.map((pair) => pair.join(" ⇄ ")).join("<br>");
 }

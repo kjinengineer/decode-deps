@@ -42,7 +42,10 @@
             value='${localStorage.getItem("fontSize") || 12}'
           />
         </div>
-        <div class="warning"><div class="warningBox">hello</div></div>
+        <div class="warning">
+          Warning: Circular Deps
+          <div class="warningBox"></div>
+        </div>
       </div>
     </div>
     <script type="module" src="./graph.js"></script>
