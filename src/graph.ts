@@ -1,17 +1,20 @@
 import * as d3 from "d3";
 
-import { maxNodes, port, width, height } from "./graphConstant";
+import { maxNodes, port } from "./constant";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
   ticked,
-} from "./graphUtil";
+} from "./utils/graphUtil";
 
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
 let savedFontSize = 12;
+
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 window.onload = () => {
   savedNodeSize = Number(localStorage.getItem("nodeSize")) || 20;
@@ -140,9 +143,10 @@ async function getNodeTree() {
     )
     .force(
       "collide",
-      d3.forceCollide().radius((d) => d.size + 5)
+      d3.forceCollide().radius((d) => d.size + 25)
     )
     .force("center", d3.forceCenter(width / 2, height / 2))
+    .alphaDecay(0.02)
     .on("tick", ticked(link, node));
 
   simulation.on("tick", () => {

@@ -43,16 +43,43 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 20px 24px;
+  width: 240px;
+  height: 70px;
+  margin: 16px 20px;
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.warning {
+  display: none;
+  z-index: 100;
+  background-color: #f3f4f6;
+  position: absolute;
+  width: 240px;
+  top: 80px;
+  right: 0;
+  margin: 20px 0px;
+  padding: 16px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.warningBox {
+  margin: 5px 0;
+  width: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
 }
 
 .bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3px 6px;
+  margin: 1px 6px;
 }
 
 .bar label {

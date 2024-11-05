@@ -1,23 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 
-interface TreeNode {
-  id: string;
-  children: TreeNode[];
-  size: number;
-}
-
-interface NodeType {
-  id: string;
-  children?: TreeNode[];
-  size: number;
-}
-
-interface LinkType {
-  source: string;
-  target: string;
-}
-
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
@@ -89,7 +72,7 @@ const extractImports = (filePath: string) => {
   return imports;
 };
 
-const getFileSize = (filePath: string): number => {
+export const getFileSize = (filePath: string): number => {
   try {
     const stats = fs.statSync(filePath);
     return parseFloat((stats.size / 1024).toFixed(2));
@@ -130,62 +113,4 @@ export const getDependencies = (
   });
 
   return dependencies;
-};
-
-export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
-  const nodesMap: { [key: string]: TreeNode } = {};
-
-  const getNode = (id: string): TreeNode => {
-    if (!nodesMap[id]) {
-      nodesMap[id] = { id, children: [], size: getFileSize(id) };
-    }
-    return nodesMap[id];
-  };
-
-  for (const file in deps) {
-    const parentNode = getNode(file);
-    deps[file].forEach((dependency) => {
-      const childNode = getNode(dependency);
-      if (!parentNode.children.includes(childNode)) {
-        parentNode.children.push(childNode);
-      }
-    });
-  }
-
-  // 최상위 노드(부모가 없는 노드)만 반환
-  return Object.values(nodesMap).filter((node) => node.id in deps);
-};
-
-export const extractNodesAndLinks = (
-  trees: TreeNode[]
-): {
-  nodes: NodeType[];
-  links: LinkType[];
-} => {
-  const nodes: NodeType[] = [];
-  const links: LinkType[] = [];
-  const visited = [];
-
-  function getNodes(node: TreeNode) {
-    const newNode: NodeType = {
-      id: node.id,
-      size: node.size,
-      children: node.children,
-    };
-
-    if (!visited.includes(newNode.id)) {
-      visited.push(newNode.id);
-      nodes.push(newNode);
-      if (node.children) {
-        node.children.forEach((child) => {
-          links.push({ source: node.id, target: child.id });
-          getNodes(child);
-        });
-      }
-    }
-  }
-
-  trees.forEach((tree) => getNodes(tree));
-
-  return { nodes, links };
 };

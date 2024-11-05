@@ -1,4 +1,5 @@
-import { width, height } from "./graphConstant.js";
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 export function applyInitialCharge(d3, simulation) {
   simulation
