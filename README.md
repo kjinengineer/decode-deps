@@ -15,14 +15,6 @@
 - **Dynamic Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight. Hover over a node to view precise module size information.
 - **Interactive Graph Customization**: Adjust node size and link distance with intuitive sliders. Supports drag-and-drop functionality to explore dependencies interactively.
 
-
-## 🔍 Who Should Use This Library?
-
-- **Refactoring Teams.** Easily identify optimization points during routine refactoring.
-- **Large Codebase Managers.** Efficiently handle complex module dependencies.
-- **Junior Developers.** Quickly understand the overall code structure.
-- **Performance-Critical Project Teams.** Optimize build performance with improved bundling and loading speeds.
-
 ## 👀 Preview
 
 Prepare your project.
@@ -66,6 +58,13 @@ npx decode-deps '["./src", "./dist"]'
 ```
 
 **Step 3.** After running the command, you can see the results at `localhost:5001`.
+
+## 🔍 Who Should Use This Library?
+
+- **Refactoring Teams.** Easily identify optimization points during routine refactoring.
+- **Large Codebase Managers.** Efficiently handle complex module dependencies.
+- **Junior Developers.** Quickly understand the overall code structure.
+- **Performance-Critical Project Teams.** Optimize build performance with improved bundling and loading speeds.
 
 ## 💬 Contributing
 
