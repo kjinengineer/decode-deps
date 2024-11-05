@@ -1,21 +1,5 @@
+import { LinkType, NodeType, TreeNode } from "../types/types";
 import { getFileSize } from "./fileUtils";
-
-interface TreeNode {
-  id: string;
-  children: TreeNode[];
-  size: number;
-}
-
-interface NodeType {
-  id: string;
-  children?: TreeNode[];
-  size: number;
-}
-
-interface LinkType {
-  source: string;
-  target: string;
-}
 
 export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
   const nodesMap: { [key: string]: TreeNode } = {};

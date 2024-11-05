@@ -1,17 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 
-interface TreeNode {
-  id: string;
-  children: TreeNode[];
-  size: number;
-}
-
-interface LinkType {
-  source: string;
-  target: string;
-}
-
 const extractImports = (filePath: string) => {
   const content = fs.readFileSync(filePath, "utf-8");
   const importRegex = /import\s.*?from\s['"](.*?)['"]/g;
