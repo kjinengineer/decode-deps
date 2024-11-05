@@ -66,7 +66,7 @@ npx decode-deps '["./src", "./dist"]'
 - **Refactoring Teams.** Easily identify optimization points during routine refactoring.
 - **Large Codebase Managers.** Efficiently handle complex module dependencies.
 - **Junior Developers.** Quickly understand the overall code structure.
-- **Performance-Critical Project Teams.** Optimize build performance with improved bundling and loading speeds.
+- **Performance-Critical Project Teams.** Optimize build performance with improved bundling.
 
 ## 💬 Contributing
 
