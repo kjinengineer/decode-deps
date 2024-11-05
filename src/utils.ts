@@ -152,7 +152,6 @@ export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
     });
   }
 
-  // 최상위 노드(부모가 없는 노드)만 반환
   return Object.values(nodesMap).filter((node) => node.id in deps);
 };
 
@@ -189,3 +188,62 @@ export const extractNodesAndLinks = (
 
   return { nodes, links };
 };
+
+export function detectCircularReferences(links: LinkType[]): string[] {
+  const visited = new Set<string>();
+  const stack = new Set<string>();
+  const circularNodes: string[] = [];
+
+  function visit(node: string): boolean {
+    if (stack.has(node)) {
+      circularNodes.push(node);
+      return true;
+    }
+    if (visited.has(node)) return false;
+
+    visited.add(node);
+    stack.add(node);
+
+    for (const link of links) {
+      if (link.source === node) {
+        if (visit(link.target)) {
+          return true;
+        }
+      }
+    }
+
+    stack.delete(node);
+    return false;
+  }
+
+  for (const link of links) {
+    if (!visited.has(link.source)) {
+      visit(link.source);
+    }
+  }
+
+  return circularNodes;
+}
+
+// 2. 순환 참조 제거 함수 (직렬화용)
+export function removeCircularReferences(obj: any) {
+  const seen = new WeakSet();
+
+  function recurse(value: any): any {
+    if (typeof value !== "object" || value === null) return value;
+    if (seen.has(value)) return "[Circular]";
+
+    seen.add(value);
+    if (Array.isArray(value)) {
+      return value.map(recurse);
+    } else {
+      const newObj: any = {};
+      for (const key in value) {
+        newObj[key] = recurse(value[key]);
+      }
+      return newObj;
+    }
+  }
+
+  return recurse(obj);
+}
