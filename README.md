@@ -76,7 +76,6 @@ Find detailed documentation and updates in the [Docs](https://decode-deps.vercel
 
 ## 🛠 Planned Updates
 The following features are planned for **future updates**:
-- Circular Dependency Detection
 - Duplicate Dependency Tracking
 - File/Folder Search Function
 - Unused Code Detection
