@@ -11,36 +11,38 @@
   <body>
     <div id="canvas">
       <svg width="100%" height="100%"></svg>
-      <div class="controls">
-        <div class="bar">
-          <label for="nodeSize">Node Size</label>
-          <input
-            type="range"
-            id="nodeSize"
-            min="5"
-            max="50"
-            value='${localStorage.getItem("nodeSize") || 20}'
-          />
-        </div>
-        <div class="bar">
-          <label for="linkDistance">Link Distance</label>
-          <input
-            type="range"
-            id="linkDistance"
-            min="10"
-            max="200"
-            value='${localStorage.getItem("linkDistance") || 125}'
-          />
-        </div>
-        <div class="bar">
-          <label for="fontSize">Font Size</label>
-          <input
-            type="range"
-            id="fontSize"
-            min="8"
-            max="30"
-            value='${localStorage.getItem("fontSize") || 12}'
-          />
+      <div class="side">
+        <div class="controls">
+          <div class="bar">
+            <label for="nodeSize">Node Size</label>
+            <input
+              type="range"
+              id="nodeSize"
+              min="5"
+              max="50"
+              value='${localStorage.getItem("nodeSize") || 20}'
+            />
+          </div>
+          <div class="bar">
+            <label for="linkDistance">Link Distance</label>
+            <input
+              type="range"
+              id="linkDistance"
+              min="10"
+              max="200"
+              value='${localStorage.getItem("linkDistance") || 125}'
+            />
+          </div>
+          <div class="bar">
+            <label for="fontSize">Font Size</label>
+            <input
+              type="range"
+              id="fontSize"
+              min="8"
+              max="30"
+              value='${localStorage.getItem("fontSize") || 12}'
+            />
+          </div>
         </div>
         <div class="warning">
           Warning: Circular Deps

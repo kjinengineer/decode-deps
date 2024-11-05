@@ -46,17 +46,18 @@ async function getNodeTree() {
   const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
   const svg = d3.select("svg");
+  const g = svg.append("g");
 
   const zoom = d3
     .zoom()
-    .scaleExtent([0.1, 30])
+    .scaleExtent([0.8, 25])
     .translateExtent([
       [-100, -100],
       [width + 90, height + 100],
     ])
-    .on("zoom", zoomed);
-
-  const g = svg.append("g");
+    .on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    });
 
   svg.call(zoom);
 
@@ -128,10 +129,6 @@ async function getNodeTree() {
     .attr("dominant-baseline", "middle")
     .style("font-size", savedFontSize);
 
-  function zoomed(event) {
-    g.attr("transform", event.transform);
-  }
-
   const simulation = d3
     .forceSimulation(nodes)
     .force(
@@ -170,8 +167,7 @@ async function getNodeTree() {
         }
         return d.y;
       });
-    svg
-      .selectAll("text")
+    g.selectAll("text")
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y);
   });
