@@ -1,17 +1,22 @@
 fetch("http://localhost:5001/track")
-  .then((response) => response.json())
-  .then((data) => {
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
     if (data.warning.length > 0) {
-      // showAlert(data.warning);
+      showAlert(data.warning);
     }
   })
-  .catch((error) => {
+  .catch(function (error) {
     console.error("Error fetching data:", error);
   });
+function showAlert(message) {
+  const warning = document.querySelector(".warning") as HTMLElement;
+  const warningBox = document.querySelector(".warningBox");
 
-// function showAlert(message) {
-//   const warningBox = document.querySelector(".warningBox");
-//   warningBox.innerText = message;
-//   warningBox.style.fontSize = "12px";
-//   warningBox.style.width = "200px";
-// }
+  if (warningBox instanceof HTMLElement) {
+    warning.style.display = "inline-block";
+  }
+
+  warningBox.innerHTML = message.map((pair) => pair.join(" ⇄ ")).join("<br>");
+}

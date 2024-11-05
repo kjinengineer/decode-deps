@@ -54,6 +54,7 @@ svg {
 }
 
 .warning {
+  display: none;
   z-index: 100;
   background-color: #f3f4f6;
   position: absolute;
@@ -61,8 +62,17 @@ svg {
   top: 80px;
   right: 0;
   margin: 20px 0px;
-  padding: 10px;
+  padding: 16px 10px;
   border-radius: 10px;
+  font-size: 14px;
+}
+
+.warningBox {
+  margin: 5px 0;
+  width: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
 }
 
 .bar {
