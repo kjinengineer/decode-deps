@@ -1,9 +1,11 @@
 # DecodeDeps
-![스크린샷 2024-11-05 오후 4 28 02](https://github.com/user-attachments/assets/f27a679e-0ecc-4dfd-8a5c-7ebf933c7fd4)
+
+![header](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F30VYZ%2FbtsKw0hpge4%2F1kYksoiCRl5eNNnRBqsTY1%2Fimg.png)
 
 **DecodeDeps** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
-## 🚀 Last Update v.1.1.0 (November 5, 2024)
+## 🚀 Last Update v.1.1.1 (November 5, 2024)
+
 - Fix Circular Dependency Error.
 - Update new UI about Circulr Dependency Error.
 
@@ -75,7 +77,9 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 Find detailed documentation and updates in the [Docs](https://decode-deps.vercel.app/).
 
 ## 🛠 Planned Updates
+
 The following features are planned for **future updates**:
+
 - Duplicate Dependency Tracking
 - File/Folder Search Function
 - Unused Code Detection
