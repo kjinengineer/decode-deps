@@ -37,79 +37,75 @@ svg {
   pointer-events: none;
 }
 
-.controls {
+.side {
   z-index: 100;
-  background-color: #f3f4f6;
   position: absolute;
   top: 0;
   right: 0;
-  width: 240px;
-  height: 70px;
-  margin: 16px 20px;
-  padding: 10px;
-  border-radius: 10px;
+  width: 270px;
+  background-color: #27272a;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  color: #d4d4d8;
+  font-size: 12px;
+}
+
+.controls {
+  width: 220px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1px 0px;
+  }
+
+  .bar label {
+    margin: 2px 15px 2px 0;
+  }
+
+  .bar input[type="range"] {
+    width: 120px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: #71717a;
+    outline: none;
+    transition: opacity 0.2s;
+    border-radius: 20px;
+  }
+
+  .bar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 8px;
+    background: #f59e0b;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 }
 
 .warning {
   display: none;
-  z-index: 100;
-  background-color: #f3f4f6;
-  position: absolute;
-  width: 240px;
-  top: 80px;
-  right: 0;
-  margin: 20px 0px;
-  padding: 16px 10px;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-.warningBox {
-  margin: 5px 0;
-  width: inherit;
+  width: 220px;
   display: flex;
-  flex-wrap: wrap;
-  font-size: 13px;
-}
-
-.bar {
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: 1px 6px;
-}
-
-.bar label {
-  font-size: 12px;
-  color: #555;
-  margin: 2px 15px 2px 0;
-}
-
-.bar input[type="range"] {
-  width: 120px;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  background: #d1d5db;
-  outline: none;
-  opacity: 0.9;
-  transition: opacity 0.2s;
-  border-radius: 20px;
-}
-
-.bar input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 7px;
-  height: 12px;
-  background: #f59e0b;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.bar input[type="range"]:hover {
-  opacity: 1;
+  font-size: 14px;
+  color: #f59e0b;
+  padding-bottom: 20px;
+  .warningBox {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #d4d4d8;
+    margin: 5px 0;
+  }
 }

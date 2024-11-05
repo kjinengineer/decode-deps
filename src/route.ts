@@ -16,8 +16,9 @@ export default function startDepTrack(sourceDir: string[]) {
   const _dirname = dirname(_filename);
 
   const app = express();
-  // app.use(express.static(path.join(_dirname, "/"))); // for publish
+
   app.use(express.static(path.join(_dirname, "../public"))); // dev
+  // app.use(express.static(path.join(_dirname, "/"))); // for publish
   app.get("/", (req, res) => {
     res.sendFile(path.join(_dirname, "public", "index.html")); // dev
     // res.sendFile(path.join(_dirname, "/", "index.html")); // for publish
