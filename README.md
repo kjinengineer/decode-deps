@@ -14,7 +14,7 @@
 - **For js, jsx, ts and tsx files**: Visualizes module dependencies by analyzing `import` and `require` statements, providing a graph view.
 - **Multiple folders**: Make it easy to analyze entire projects or specific subfolders.
 - **Detect circular dependencies**: Automatically identifies circular dependencies within your modules.
-- **Various Node Color**: Node colors vary based on module size, offering a quick visual indication of module weight.
+- **Various Node Color**: Node colors vary based on module size, offering a quick visual indication.
 - **Interactive Graph**: Navigate and explore the dependency graph with zoom and pan features, as well as adjustable node sizes and link distances, providing a fully interactive visualization
 
 ## 👀 Preview
