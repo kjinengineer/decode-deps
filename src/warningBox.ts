@@ -5,6 +5,9 @@ fetch("http://localhost:5001/track")
   .then(function (data) {
     if (data.warning.length > 0) {
       showAlert(data.warning);
+    } else {
+      const warning = document.querySelector(".warning") as HTMLElement;
+      warning.style.display = "none";
     }
   })
   .catch(function (error) {
