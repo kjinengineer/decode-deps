@@ -76,14 +76,6 @@ If you'd like to contribute, feel free to submit a pull request or open an issue
 
 Find detailed documentation and updates in the [Docs](https://decode-deps.vercel.app/).
 
-## 🛠 Planned Updates
-
-The following features are planned for **future updates**:
-
-- Duplicate Dependency Tracking
-- File/Folder Search Function
-- Unused Code Detection
-
 ## 📝 License
 
 This project is licensed under the **MIT License**.
