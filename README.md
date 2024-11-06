@@ -1,6 +1,4 @@
-# DecodeDeps
-
-![header](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F30VYZ%2FbtsKw0hpge4%2F1kYksoiCRl5eNNnRBqsTY1%2Fimg.png)
+![banner](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbnHLsQ%2FbtsKyo3HE7O%2FX0GKHoOT4yuMqMFLRsQAC1%2Fimg.png)
 
 **DecodeDeps** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
