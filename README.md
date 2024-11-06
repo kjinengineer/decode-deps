@@ -8,6 +8,7 @@
 
 - Fix Circular Dependency Error.
 - Update new UI about Circulr Dependency Error.
+- Update Docs page.
 
 ## 🌟 Key Features
 
