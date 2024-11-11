@@ -1,13 +1,14 @@
 import * as d3 from "d3";
 
-import { maxNodes, portNumber } from "./constant";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
   ticked,
-} from "./utils/graphUtil";
+} from "../utils/graphUtil";
+
+import { maxNodes, portNumber } from "../constant";
 
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
@@ -45,16 +46,13 @@ async function getNodeTree() {
   const sizeArray = nodes.map((d) => d.size);
   const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
-  const svg = d3.select("svg");
+  const svg = d3.select("svg").append("svg");
+
   const g = svg.append("g");
 
   const zoom = d3
     .zoom()
-    .scaleExtent([0.8, 25])
-    .translateExtent([
-      [-100, -100],
-      [width + 90, height + 100],
-    ])
+    .scaleExtent([1, 25])
     .on("zoom", (event) => {
       g.attr("transform", event.transform);
     });
@@ -155,16 +153,16 @@ async function getNodeTree() {
     node
       .attr("cx", (d) => {
         if (d.x < 0 || d.x > width) {
-          d.vx *= -1;
-          d.x = Math.max(0, Math.min(width, d.x));
+          // d.vx *= -1;
+          // d.x = Math.max(0, Math.min(width, d.x));
         }
         return d.x;
       })
       .attr("cy", (d) => {
-        if (d.y < 0 || d.y > height) {
-          d.vy *= -1;
-          d.y = Math.max(0, Math.min(height, d.y));
-        }
+        // if (d.y < 0 || d.y > height) {
+        //   d.vy *= -1;
+        //   d.y = Math.max(0, Math.min(height, d.y));
+        // }
         return d.y;
       });
     g.selectAll("text")

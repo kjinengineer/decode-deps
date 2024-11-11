@@ -1,4 +1,4 @@
-import { portNumber } from "./constant";
+import { portNumber } from "../constant";
 
 fetch(`http://localhost:${portNumber}/track`)
   .then(function (response) {
@@ -20,5 +20,9 @@ function showAlert(message) {
   const warningBox = document.querySelector(".warningBox");
 
   warning.style.display = "inline-block";
-  warningBox.innerHTML = message.map((pair) => pair.join(" ⇄ ")).join("<br>");
+  warningBox.innerHTML = message
+    .map((pair) => {
+      return `<div class="list">${pair.join(" ⇄ ")}</span>`;
+    })
+    .join("");
 }

@@ -10,7 +10,7 @@ export function applyInitialCharge(d3, simulation) {
   setTimeout(() => {
     simulation.force("charge", null);
     simulation.alphaTarget(0);
-  }, 2000);
+  }, 1500);
 }
 
 export function ticked(link, node) {
@@ -36,14 +36,14 @@ export function ticked(link, node) {
 }
 
 export function dragStarted(event, d, simulation) {
-  if (!event.active) simulation.alphaTarget(0.2).restart();
+  if (!event.active) simulation.alphaTarget(0.5).restart();
   d.fx = d.x;
   d.fy = d.y;
 }
 
 export function dragged(event, d) {
-  d.fx = Math.max(20, Math.min(width - 100, event.x));
-  d.fy = Math.max(20, Math.min(height - 100, event.y));
+  d.fx = Math.max(0, Math.min(width - 100, event.x));
+  d.fy = Math.max(30, Math.min(height - 30, event.y));
 }
 
 export function dragEnded(event, d, simulation) {
