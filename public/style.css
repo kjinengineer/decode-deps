@@ -4,7 +4,7 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto";
   font-weight: 400;
 }
 
@@ -15,49 +15,40 @@ body {
   overflow: hidden;
 }
 
-svg {
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-}
-
-.tooltip {
-  position: absolute;
-  text-align: center;
-  padding: 8px;
-  background: #e5e7eb;
-  border-radius: 5px;
-  pointer-events: none;
-  visibility: hidden;
-  font-size: 14px;
-}
-
-.node-text {
-  user-select: none;
-  pointer-events: none;
-}
-
-.side {
+#side {
   z-index: 100;
+  width: 300px;
+  height: 100vh;
   position: absolute;
   top: 0;
-  right: 0;
-  width: 270px;
-  background-color: #27272a;
+  left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  background-color: #27272a;
   color: #d4d4d8;
   font-size: 12px;
 }
 
-.controls {
+.side-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+#projectTitle {
+  font-size: 27px;
+  font-weight: 600;
+  padding: 36px 0 18px 0;
+  text-align: center;
+  width: 85%;
+  border-bottom: solid #525252;
+}
+#control {
   width: 220px;
-  height: 100px;
   display: flex;
+  margin: 35px 0 20px 0;
   flex-direction: column;
-  justify-content: center;
 
   .bar {
     display: flex;
@@ -92,6 +83,30 @@ svg {
   }
 }
 
+#mode {
+  width: 220px;
+  margin: 20px 0;
+
+  .mode-buttons {
+    display: flex;
+    justify-content: space-between;
+    .mode-button {
+      width: 42%;
+      text-align: center;
+      font-size: 14px;
+      padding: 10px 7px;
+      margin: 3px 0;
+      border-radius: 5px;
+      background-color: #525252;
+    }
+    .mode-button:hover {
+      cursor: pointer;
+      color: #27272a;
+      background-color: #f59e0b;
+    }
+  }
+}
+
 .warning {
   display: none;
   width: 220px;
@@ -100,12 +115,33 @@ svg {
   align-items: center;
   font-size: 14px;
   color: #f59e0b;
-  padding-bottom: 20px;
+  margin: 20px 0;
   .warningBox {
     display: flex;
     flex-wrap: wrap;
-    font-size: 12px;
+
     color: #d4d4d8;
     margin: 5px 0;
   }
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  padding-left: 270px;
+  overflow: scroll;
+}
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 8px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  pointer-events: none;
+  visibility: hidden;
+  font-size: 14px;
+}
+.node-text {
+  user-select: none;
+  pointer-events: none;
 }

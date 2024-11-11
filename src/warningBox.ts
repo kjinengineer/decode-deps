@@ -1,4 +1,6 @@
-fetch("http://localhost:5001/track")
+import { portNumber } from "./constant";
+
+fetch(`http://localhost:${portNumber}/track`)
   .then(function (response) {
     return response.json();
   })

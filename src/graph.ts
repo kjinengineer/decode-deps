@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import { maxNodes, port } from "./constant";
+import { maxNodes, portNumber } from "./constant";
 import {
   applyInitialCharge,
   dragEnded,
@@ -31,7 +31,7 @@ window.onload = () => {
 };
 
 async function getNodeTree() {
-  const response = await fetch(`http://localhost:${port}/track`);
+  const response = await fetch(`http://localhost:${portNumber}/track`);
   const data = await response.json();
   const { nodes, links } = data;
 

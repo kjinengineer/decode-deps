@@ -9,18 +9,23 @@ import {
   removeDuplicateCircularDeps,
 } from "./utils/depUtils";
 import { getDependencies } from "./utils/fileUtils";
-import { port } from "./constant";
+import { portNumber } from "./constant";
 
-export default function startDepTrack(sourceDir: string[]) {
+const cors = require("cors");
+
+export default function startDecodeDeps(sourceDir: string[]) {
   const _filename = fileURLToPath(import.meta.url);
   const _dirname = dirname(_filename);
 
   const app = express();
+  app.use(cors());
 
-  app.use(express.static(path.join(_dirname, "../public"))); // dev
-  // app.use(express.static(path.join(_dirname, "/"))); // for publish
+  // app.use(express.static(path.join(_dirname, "static"))); // dev
+  app.use(express.static(path.join(_dirname, "/"))); // for publish
+  console.log(path.join(_dirname, "index.html"));
   app.get("/", (req, res) => {
-    res.sendFile(path.join(_dirname, "public", "index.html")); // dev
+    res.sendFile(path.join(_dirname, "index.html"));
+
     // res.sendFile(path.join(_dirname, "/", "index.html")); // for publish
   });
 
@@ -41,7 +46,9 @@ export default function startDepTrack(sourceDir: string[]) {
     res.json(safeResultData);
   });
 
-  app.listen(port, () => {
-    console.log(`Module Dependency Graph Ready at http://localhost:${port}`);
+  app.listen(portNumber, () => {
+    console.log(
+      `Module Dependency Graph Ready at http://localhost:${portNumber}`
+    );
   });
 }
