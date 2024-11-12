@@ -16,9 +16,8 @@ body {
 }
 
 #side {
-  /* display: none; */
   z-index: 100;
-  width: 300px;
+  width: 320px;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -47,7 +46,7 @@ body {
   border-bottom: solid #525252;
 }
 #control {
-  width: 220px;
+  width: 260px;
   display: flex;
   margin: 35px 0 20px 0;
   flex-direction: column;
@@ -64,10 +63,10 @@ body {
   }
 
   .bar input[type="range"] {
-    width: 120px;
+    width: 160px;
     -webkit-appearance: none;
     appearance: none;
-    height: 3px;
+    height: 2px;
     background: #71717a;
     outline: none;
     transition: opacity 0.2s;
@@ -77,8 +76,8 @@ body {
   .bar input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     background: #f59e0b;
     cursor: pointer;
     border-radius: 6px;
@@ -86,16 +85,16 @@ body {
 }
 
 #mode {
-  width: 220px;
+  width: 260px;
   margin: 20px 0;
 
   .mode-buttons {
     display: flex;
     justify-content: space-between;
     .mode-button {
-      width: 42%;
+      width: 25%;
       text-align: center;
-      font-size: 14px;
+      font-size: 12px;
       padding: 10px 7px;
       margin: 3px 0;
       border-radius: 5px;
@@ -139,7 +138,7 @@ body {
 svg {
   position: absolute;
   right: 0;
-  width: calc(100vw - 300px);
+  width: calc(100vw - 320px);
   height: 100%;
 }
 .tooltip {
