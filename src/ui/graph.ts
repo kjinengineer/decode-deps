@@ -46,13 +46,17 @@ async function getNodeTree() {
   const sizeArray = nodes.map((d) => d.size);
   const [minModuleSize, maxModuleSize] = d3.extent(sizeArray);
 
-  const svg = d3.select("svg").append("svg");
+  const svg = d3.select("svg");
 
   const g = svg.append("g");
 
   const zoom = d3
     .zoom()
-    .scaleExtent([1, 25])
+    .scaleExtent([0.7, 25])
+    .translateExtent([
+      [-100, -100],
+      [width + 90, height + 100],
+    ])
     .on("zoom", (event) => {
       g.attr("transform", event.transform);
     });
@@ -152,10 +156,10 @@ async function getNodeTree() {
       .attr("y2", (d) => d.target.y);
     node
       .attr("cx", (d) => {
-        if (d.x < 0 || d.x > width) {
-          // d.vx *= -1;
-          // d.x = Math.max(0, Math.min(width, d.x));
-        }
+        // if (d.x < 0 || d.x > width) {
+        //   d.vx *= -1;
+        //   d.x = Math.max(0, Math.min(width, d.x));
+        // }
         return d.x;
       })
       .attr("cy", (d) => {

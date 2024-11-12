@@ -10,7 +10,7 @@ export function applyInitialCharge(d3, simulation) {
   setTimeout(() => {
     simulation.force("charge", null);
     simulation.alphaTarget(0);
-  }, 1500);
+  }, 2000);
 }
 
 export function ticked(link, node) {
