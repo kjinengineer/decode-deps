@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { fetchData } from "../utils/dataFetcher";
 import {
   applyInitialCharge,
   dragEnded,
@@ -7,8 +7,7 @@ import {
   dragStarted,
   ticked,
 } from "../utils/graphUtil";
-
-import { maxNodes, portNumber } from "../constant";
+import { maxNodes } from "../constant";
 
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
@@ -32,8 +31,36 @@ window.onload = () => {
 };
 
 async function getNodeTree() {
-  const response = await fetch(`http://localhost:${portNumber}/track`);
-  const data = await response.json();
+  const data = await fetchData();
+
+  // const data = {
+  //   nodes: [
+  //     { id: "App.js", size: 0.23, type: "internal" },
+  //     { id: "Footer.js", size: 0.06, type: "internal" },
+  //     { id: "Header.js", size: 0.11, type: "internal" },
+  //     { id: "Navigation.js", size: 0.07, type: "internal" },
+  //     { id: "Home.js", size: 0.13, type: "internal" },
+  //     { id: "helpers.js", size: 0.07, type: "internal" },
+  //     { id: "react", size: 0.5, type: "external" },
+  //     { id: "axios", size: 0.3, type: "external" },
+  //     { id: "lodash", size: 0.2, type: "external" },
+  //   ],
+  //   links: [
+  //     { source: "App.js", target: "Footer.js", linkType: "internal" },
+  //     { source: "App.js", target: "Header.js", linkType: "internal" },
+  //     { source: "Header.js", target: "Navigation.js", linkType: "internal" },
+  //     { source: "App.js", target: "Home.js", linkType: "internal" },
+  //     { source: "Home.js", target: "helpers.js", linkType: "internal" },
+  //     { source: "App.js", target: "react", linkType: "external" },
+  //     { source: "App.js", target: "axios", linkType: "external" },
+  //     { source: "Header.js", target: "lodash", linkType: "external" },
+  //   ],
+  //   warnings: [
+  //     { circular: ["App1.js", "App2.js"] },
+  //     { circular: ["AppA.js", "AppB.js"] },
+  //   ],
+  // };
+
   const { nodes, links } = data;
 
   if (nodes.length > maxNodes) {
@@ -154,21 +181,7 @@ async function getNodeTree() {
       .attr("y1", (d) => d.source.y)
       .attr("x2", (d) => d.target.x)
       .attr("y2", (d) => d.target.y);
-    node
-      .attr("cx", (d) => {
-        // if (d.x < 0 || d.x > width) {
-        //   d.vx *= -1;
-        //   d.x = Math.max(0, Math.min(width, d.x));
-        // }
-        return d.x;
-      })
-      .attr("cy", (d) => {
-        // if (d.y < 0 || d.y > height) {
-        //   d.vy *= -1;
-        //   d.y = Math.max(0, Math.min(height, d.y));
-        // }
-        return d.y;
-      });
+    node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
     g.selectAll("text")
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y);
