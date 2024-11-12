@@ -22,7 +22,7 @@ export default function startDecodeDeps(sourceDir: string[]) {
 
   // app.use(express.static(path.join(_dirname, "static"))); // dev
   app.use(express.static(path.join(_dirname, "/"))); // for publish
-  console.log(path.join(_dirname, "index.html"));
+
   app.get("/", (req, res) => {
     res.sendFile(path.join(_dirname, "index.html"));
 

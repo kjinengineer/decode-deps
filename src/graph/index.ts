@@ -1,9 +1,13 @@
 import { getModules } from "./getModules";
 import { getGraph } from "./getGraph";
+import { fetchData } from "../utils/dataFetcher";
 
 let savedNodeSize = 20;
 let savedLinkDistance = 125;
 let savedFontSize = 12;
+
+let type = "external";
+let data = null;
 
 window.onload = () => {
   savedNodeSize = Number(localStorage.getItem("nodeSize")) || 20;
@@ -17,14 +21,11 @@ window.onload = () => {
   (document.getElementById("fontSize") as HTMLInputElement).value =
     savedFontSize.toString();
 
-  renderGraph("all");
+  getModules(type).then((initialData) => {
+    getGraph(initialData, savedNodeSize, savedLinkDistance, savedFontSize);
+  });
 };
 
-function renderGraph(type: string) {
-  getModules(type).then((data) =>
-    getGraph(data, savedNodeSize, savedLinkDistance, savedFontSize)
-  );
-}
 const AllButton = document.getElementById("showAll") as HTMLDivElement;
 const internalButton = document.getElementById(
   "showInternal"
@@ -34,13 +35,13 @@ const externalButton = document.getElementById(
 ) as HTMLDivElement;
 
 if (AllButton) {
-  AllButton.addEventListener("click", () => renderGraph("all"));
+  // AllButton.addEventListener("click", () => setType("all"));
 }
 
 if (internalButton) {
-  internalButton.addEventListener("click", () => renderGraph("internal"));
+  // internalButton.addEventListener("click", () => console.log(1));
 }
 
 if (externalButton) {
-  externalButton.addEventListener("click", () => renderGraph("external"));
+  externalButton.addEventListener("click", () => getModules(type));
 }

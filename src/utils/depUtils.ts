@@ -1,12 +1,31 @@
 import { LinkType, NodeType, TreeNode } from "../types/types";
 import { getFileSize } from "./fileUtils";
+import path from "path";
+import * as fs from "fs";
+
+const packageJsonPath = path.resolve(process.cwd(), "package.json");
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
+const allDependencies = {
+  ...packageJson.dependencies,
+  ...packageJson.devDependencies,
+};
+const allDependenciesName = Object.keys(allDependencies);
 
 export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
   const nodesMap: { [key: string]: TreeNode } = {};
-
   const getNode = (id: string): TreeNode => {
+    const fileRoot = id.split("/");
+    const fileName = fileRoot[fileRoot.length - 1].split(".")[0];
+
     if (!nodesMap[id]) {
-      nodesMap[id] = { id, children: [], size: getFileSize(id) };
+      nodesMap[id] = {
+        id,
+        children: [],
+        size: getFileSize(id),
+        linkType: allDependenciesName.includes(fileName)
+          ? "external"
+          : "internal",
+      };
     }
     return nodesMap[id];
   };
@@ -15,6 +34,7 @@ export const buildTree = (deps: { [key: string]: string[] }): TreeNode[] => {
     const parentNode = getNode(file);
     deps[file].forEach((dependency) => {
       const childNode = getNode(dependency);
+
       if (!parentNode.children.includes(childNode)) {
         parentNode.children.push(childNode);
       }
@@ -29,48 +49,64 @@ export const extractNodesAndLinks = (
 ): {
   nodes: NodeType[];
   links: LinkType[];
-  warning: [string, string][];
+  warning: { circular: string[] }[];
 } => {
   const nodes: NodeType[] = [];
   const links: LinkType[] = [];
-  const warning: [string, string][] = [];
-  const visited = [];
+  const warning: { circular: string[] }[] = [];
+  const visited = new Set<string>();
 
   function getNodes(node: TreeNode) {
+    const fileRoot = node.id.split("/");
+    const fileName = fileRoot[fileRoot.length - 1].split(".")[0];
+
     const newNode: NodeType = {
       id: node.id,
       size: node.size,
-      children: node.children,
+      linkType: allDependenciesName.includes(fileName)
+        ? "external"
+        : "internal",
     };
 
-    if (!visited.includes(newNode.id)) {
-      visited.push(newNode.id);
+    if (!visited.has(newNode.id)) {
+      visited.add(newNode.id);
       nodes.push(newNode);
       if (node.children) {
         node.children.forEach((child) => {
-          links.push({ source: node.id, target: child.id });
+          links.push({
+            source: node.id,
+            target: child.id,
+
+            linkType:
+              allDependenciesName.includes(node.id) ||
+              allDependenciesName.includes(child.id)
+                ? "external"
+                : "internal",
+          });
           getNodes(child);
         });
       }
     }
   }
 
-  trees.forEach((tree) => getNodes(tree));
+  trees.forEach((tree) => {
+    getNodes(tree);
+  });
 
   return { nodes, links, warning };
 };
 
-export function detectCircularDeps(links: LinkType[]): [string, string][] {
+export function detectCircularDeps(
+  links: LinkType[]
+): { circular: string[] }[] {
   const visited = new Set<string>();
   const stack = new Set<string>();
-  const circularDependencies: [string, string][] = [];
+  const circularDependencies: { circular: string[] }[] = [];
 
   function visit(node: string): boolean {
     if (stack.has(node)) {
       const circularPath = Array.from(stack).concat(node);
-      for (let i = 0; i < circularPath.length - 1; i++) {
-        circularDependencies.push([circularPath[i], circularPath[i + 1]]);
-      }
+      circularDependencies.push({ circular: circularPath });
       return true;
     }
 
@@ -121,18 +157,18 @@ export function removeCircularDeps(obj: any) {
 }
 
 export function removeDuplicateCircularDeps(
-  dependencies: [string, string][]
-): [string, string][] {
+  dependencies: { circular: string[] }[]
+): { circular: string[] }[] {
   const uniqueDeps = new Set<string>();
-  const result: [string, string][] = [];
+  const result: { circular: string[] }[] = [];
 
-  dependencies.forEach((pair) => {
-    const sortedPair = pair.slice().sort();
-    const key = `${sortedPair[0]}-${sortedPair[1]}`;
+  dependencies.forEach((dep) => {
+    const sortedDep = dep.circular.slice().sort();
+    const key = sortedDep.join("-");
 
     if (!uniqueDeps.has(key)) {
       uniqueDeps.add(key);
-      result.push(pair);
+      result.push(dep);
     }
   });
 
