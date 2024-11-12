@@ -1,67 +1,27 @@
 import * as d3 from "d3";
-import { fetchData } from "../utils/dataFetcher";
 import {
   applyInitialCharge,
   dragEnded,
   dragged,
   dragStarted,
   ticked,
-} from "../utils/graphUtil";
+} from "./getGraphForce";
 import { maxNodes } from "../constant";
-
-let savedNodeSize = 20;
-let savedLinkDistance = 125;
-let savedFontSize = 12;
 
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-window.onload = () => {
-  savedNodeSize = Number(localStorage.getItem("nodeSize")) || 20;
-  savedLinkDistance = Number(localStorage.getItem("linkDistance")) || 125;
-  savedFontSize = Number(localStorage.getItem("fontSize")) || 12;
-
-  (document.getElementById("nodeSize") as HTMLInputElement).value =
-    savedNodeSize.toString();
-  (document.getElementById("linkDistance") as HTMLInputElement).value =
-    savedLinkDistance.toString();
-  (document.getElementById("fontSize") as HTMLInputElement).value =
-    savedFontSize.toString();
-  getNodeTree();
-};
-
-async function getNodeTree() {
-  const data = await fetchData();
-
-  // const data = {
-  //   nodes: [
-  //     { id: "App.js", size: 0.23, type: "internal" },
-  //     { id: "Footer.js", size: 0.06, type: "internal" },
-  //     { id: "Header.js", size: 0.11, type: "internal" },
-  //     { id: "Navigation.js", size: 0.07, type: "internal" },
-  //     { id: "Home.js", size: 0.13, type: "internal" },
-  //     { id: "helpers.js", size: 0.07, type: "internal" },
-  //     { id: "react", size: 0.5, type: "external" },
-  //     { id: "axios", size: 0.3, type: "external" },
-  //     { id: "lodash", size: 0.2, type: "external" },
-  //   ],
-  //   links: [
-  //     { source: "App.js", target: "Footer.js", linkType: "internal" },
-  //     { source: "App.js", target: "Header.js", linkType: "internal" },
-  //     { source: "Header.js", target: "Navigation.js", linkType: "internal" },
-  //     { source: "App.js", target: "Home.js", linkType: "internal" },
-  //     { source: "Home.js", target: "helpers.js", linkType: "internal" },
-  //     { source: "App.js", target: "react", linkType: "external" },
-  //     { source: "App.js", target: "axios", linkType: "external" },
-  //     { source: "Header.js", target: "lodash", linkType: "external" },
-  //   ],
-  //   warnings: [
-  //     { circular: ["App1.js", "App2.js"] },
-  //     { circular: ["AppA.js", "AppB.js"] },
-  //   ],
-  // };
-
+export function getGraph(
+  data,
+  savedNodeSize,
+  savedLinkDistance,
+  savedFontSize
+) {
   const { nodes, links } = data;
+
+  const container = document.getElementById("graph");
+
+  container.innerHTML = "";
 
   if (nodes.length > maxNodes) {
     alert(
