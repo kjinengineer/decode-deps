@@ -25,25 +25,31 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #27272a;
-  color: #d4d4d8;
+  background-color: #171717;
+  color: #eeeeee;
   font-size: 12px;
 }
 
 .side-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-align: start;
-  margin-bottom: 7px;
+  margin-bottom: 12px;
 }
 
 #projectTitle {
+  width: 260px;
   font-size: 27px;
   font-weight: 600;
-  padding: 36px 0 18px 0;
+  padding: 36px 0 10px 0;
   text-align: center;
-  width: 85%;
-  border-bottom: solid #525252;
+
+  #logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f59e0b;
+  }
 }
 #control {
   width: 260px;
@@ -66,8 +72,8 @@ body {
     width: 160px;
     -webkit-appearance: none;
     appearance: none;
-    height: 2px;
-    background: #71717a;
+    height: 1px;
+    background: #eeeeee50;
     outline: none;
     transition: opacity 0.2s;
     border-radius: 20px;
@@ -76,11 +82,16 @@ body {
   .bar input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 11px;
-    height: 11px;
-    background: #f59e0b;
+    width: 9px;
+    height: 9px;
+    background: #eeeeee;
     cursor: pointer;
     border-radius: 6px;
+  }
+
+  .bar input[type="range"]::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    background: #f59e0b;
   }
 }
 
@@ -94,16 +105,16 @@ body {
     .mode-button {
       width: 25%;
       text-align: center;
-      font-size: 12px;
+      font-size: 10px;
       padding: 10px 7px;
       margin: 3px 0;
-      border-radius: 5px;
-      background-color: #525252;
+      border-radius: 6px;
+      border: solid 0.3px #eeeeee;
     }
     .mode-button:hover {
       cursor: pointer;
-      color: #27272a;
-      background-color: #f59e0b;
+      color: #f59e0b;
+      border: solid 0.3px #f59e0b;
     }
   }
 }
@@ -123,7 +134,7 @@ body {
     display: flex;
     font-size: 14px;
     flex-wrap: wrap;
-    color: #d4d4d8;
+    color: #eeeeee;
 
     .list {
       width: inherit;
