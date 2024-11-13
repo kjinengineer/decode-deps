@@ -20,6 +20,10 @@ function createReactiveState(initialValue, callback) {
   );
 }
 
+getModules("all").then((data) => {
+  getGraph(data, savedNodeSize, savedLinkDistance, savedFontSize);
+});
+
 const state = createReactiveState(null, (newValue) => {
   getModules(newValue || "all").then((data) => {
     getGraph(data, savedNodeSize, savedLinkDistance, savedFontSize);
