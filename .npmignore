@@ -6,3 +6,7 @@ tsconfig.json
 yarn.lock
 public
 test
+debug
+
+index.html
+!dist/index.html 
