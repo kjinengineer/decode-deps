@@ -24,10 +24,20 @@ body {
   left: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   background-color: #171717;
   color: #eeeeee;
   font-size: 12px;
+
+  #footer {
+    padding: 20px 0;
+    font-size: 11px;
+  }
+
+  a {
+    color: #f59e0b;
+  }
 }
 
 .side-title {
@@ -41,7 +51,7 @@ body {
   width: 240px;
   font-size: 27px;
   font-weight: 600;
-  padding: 36px 0 10px 0;
+  padding: 12px 0;
   text-align: center;
 
   #logo {
@@ -54,7 +64,7 @@ body {
 #control {
   width: 240px;
   display: flex;
-  margin: 35px 0 20px 0;
+  margin: 35px 0;
   flex-direction: column;
 
   .bar {
