@@ -32,9 +32,11 @@ export async function getModules(inpuType: string) {
         newNode.push(el);
       }
     }
+    addColor(inpuType);
+    remoeColor("external");
+    remoeColor("all");
 
     const result = { nodes: newNode, links: newLink, warning: data.warning };
-
     return result;
   } else if (inpuType === "external") {
     let newLink = [];
@@ -60,10 +62,47 @@ export async function getModules(inpuType: string) {
         newNode.push(el);
       }
     }
-
+    addColor(inpuType);
+    remoeColor("internal");
+    remoeColor("all");
     const result = { nodes: newNode, links: newLink, warning: data.warning };
     return result;
   } else {
+    addColor("all");
+    remoeColor("external");
+    remoeColor("internal");
     return data;
+  }
+}
+
+function addColor(type: string) {
+  if (type === "internal") {
+    const buttonbox = document.querySelector("#showInternal") as HTMLElement;
+    buttonbox.style.borderColor = "#f59e0b";
+    buttonbox.style.color = "#f59e0b";
+  } else if (type === "external") {
+    const buttonbox = document.querySelector("#showExternal") as HTMLElement;
+    buttonbox.style.borderColor = "#f59e0b";
+    buttonbox.style.color = "#f59e0b";
+  } else {
+    const buttonbox = document.querySelector("#showAll") as HTMLElement;
+    buttonbox.style.borderColor = "#f59e0b";
+    buttonbox.style.color = "#f59e0b";
+  }
+}
+
+function remoeColor(type: string) {
+  if (type === "internal") {
+    const buttonbox = document.querySelector("#showInternal") as HTMLElement;
+    buttonbox.style.borderColor = "white";
+    buttonbox.style.color = "white";
+  } else if (type === "external") {
+    const buttonbox = document.querySelector("#showExternal") as HTMLElement;
+    buttonbox.style.borderColor = "white";
+    buttonbox.style.color = "white";
+  } else {
+    const buttonbox = document.querySelector("#showAll") as HTMLElement;
+    buttonbox.style.borderColor = "white";
+    buttonbox.style.color = "white";
   }
 }
