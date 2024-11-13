@@ -1,10 +1,7 @@
-import { portNumber } from "../constant";
+import { fetchData } from "../utils/dataFetcher";
 
-fetch(`http://localhost:${portNumber}/track`)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
+fetchData()
+  .then((data) => {
     if (data.warning.length > 0) {
       showAlert(data.warning);
     } else {
@@ -17,12 +14,15 @@ fetch(`http://localhost:${portNumber}/track`)
   });
 function showAlert(message) {
   const warning = document.querySelector(".warning") as HTMLElement;
-  const warningBox = document.querySelector(".warningBox");
+  const warningTitle = document.querySelector(".warning-title") as HTMLElement;
+  const warningBox = document.querySelector(".warningBox") as HTMLElement;
 
   warning.style.display = "inline-block";
+  warningTitle.innerHTML = "Warning: Circular Deps";
   warningBox.innerHTML = message
     .map((pair) => {
-      return `<div class="list">${pair.join(" ⇄ ")}</span>`;
+      const result = pair.circular;
+      return `<div class="list">${result.join(" ⇄ ")}</span>`;
     })
     .join("");
 }

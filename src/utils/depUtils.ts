@@ -100,12 +100,12 @@ export function detectCircularDeps(
   links: LinkType[]
 ): { circular: string[] }[] {
   const visited = new Set<string>();
-  const stack = new Set<string>();
   const circularDependencies: { circular: string[] }[] = [];
 
-  function visit(node: string): boolean {
-    if (stack.has(node)) {
-      const circularPath = Array.from(stack).concat(node);
+  function visit(node: string, path: string[]): boolean {
+    if (path.includes(node)) {
+      const cycleStartIndex = path.indexOf(node);
+      const circularPath = path.slice(cycleStartIndex, cycleStartIndex + 2);
       circularDependencies.push({ circular: circularPath });
       return true;
     }
@@ -113,21 +113,21 @@ export function detectCircularDeps(
     if (visited.has(node)) return false;
 
     visited.add(node);
-    stack.add(node);
+    path.push(node);
 
     for (const link of links) {
       if (link.source === node) {
-        visit(link.target);
+        visit(link.target, path);
       }
     }
 
-    stack.delete(node);
+    path.pop();
     return false;
   }
 
   for (const link of links) {
     if (!visited.has(link.source)) {
-      visit(link.source);
+      visit(link.source, []);
     }
   }
 

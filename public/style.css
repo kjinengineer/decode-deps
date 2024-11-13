@@ -24,31 +24,47 @@ body {
   left: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: #27272a;
-  color: #d4d4d8;
+  background-color: #171717;
+  color: #eeeeee;
   font-size: 12px;
+
+  #footer {
+    padding: 20px 0;
+    font-size: 11px;
+  }
+
+  a {
+    color: #f59e0b;
+  }
 }
 
 .side-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-align: start;
-  margin-bottom: 7px;
+  margin-bottom: 12px;
 }
 
 #projectTitle {
+  width: 240px;
   font-size: 27px;
   font-weight: 600;
-  padding: 36px 0 18px 0;
+  padding: 12px 0;
   text-align: center;
-  width: 85%;
-  border-bottom: solid #525252;
+
+  #logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f59e0b;
+  }
 }
 #control {
-  width: 260px;
+  width: 240px;
   display: flex;
-  margin: 35px 0 20px 0;
+  margin: 35px 0;
   flex-direction: column;
 
   .bar {
@@ -59,15 +75,15 @@ body {
   }
 
   .bar label {
-    margin: 2px 15px 2px 0;
+    margin: 2px 6px 2px 0;
   }
 
   .bar input[type="range"] {
-    width: 160px;
+    width: 135px;
     -webkit-appearance: none;
     appearance: none;
-    height: 2px;
-    background: #71717a;
+    height: 1px;
+    background: #eeeeee50;
     outline: none;
     transition: opacity 0.2s;
     border-radius: 20px;
@@ -76,16 +92,21 @@ body {
   .bar input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 11px;
-    height: 11px;
-    background: #f59e0b;
+    width: 9px;
+    height: 9px;
+    background: #eeeeee;
     cursor: pointer;
     border-radius: 6px;
+  }
+
+  .bar input[type="range"]::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    background: #f59e0b;
   }
 }
 
 #mode {
-  width: 260px;
+  width: 240px;
   margin: 20px 0;
 
   .mode-buttons {
@@ -94,37 +115,36 @@ body {
     .mode-button {
       width: 25%;
       text-align: center;
-      font-size: 12px;
+      font-size: 10px;
       padding: 10px 7px;
       margin: 3px 0;
-      border-radius: 5px;
-      background-color: #525252;
+      border-radius: 6px;
+      border: solid 0.3px #eeeeee;
     }
     .mode-button:hover {
       cursor: pointer;
-      color: #27272a;
-      background-color: #f59e0b;
+      color: #f59e0b;
+      border: solid 0.3px #f59e0b;
     }
   }
 }
 
 .warning {
   display: none;
-  width: 220px;
+  width: 240px;
   display: flex;
   color: #f59e0b;
   margin: 20px 0;
   .warning-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     text-align: start;
   }
   .warningBox {
     display: flex;
-    font-size: 14px;
+    font-size: 13px;
     flex-wrap: wrap;
-    color: #d4d4d8;
-
+    font-weight: 300;
     .list {
       width: inherit;
       word-wrap: break-word;

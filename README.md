@@ -2,11 +2,10 @@
 
 **DecodeDeps** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
-## 🚀 Last Update v.1.1.1 (November 5, 2024)
+## 🚀 Last Update v.1.2.0 (November 13, 2024)
 
-- Fix Circular Dependency Error.
-- Update new UI about Circulr Dependency Error.
-- Update Docs page.
+- Add functionality to distinguish and display **external** and **internal** modules
+- Update UI for the side menu
 
 ## 🌟 Key Features
 
@@ -20,7 +19,7 @@
 
 Prepare your project.
 
-![project](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMLYe5%2FbtsKwt4gA1g%2F3W1k70jiJzRERGuBrLDik0%2Fimg.png "project")
+![project](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmPiRZ%2FbtsKHsR7bWb%2FkQuP3vEWbYG0UrMIdTxKG1%2Fimg.png "project")
 
 Enter the command.
 
@@ -28,7 +27,7 @@ Enter the command.
 
 Check the results on port 5001.
 
-![result](https://blog.kakaocdn.net/dn/v1QuI/btsKxUU3gZ3/bsavxqxQW8knNeV3Prajs1/img.gif "result")
+![result](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcYzM1S%2FbtsKHNaym4D%2Fil4Q7ouMj3tjScoCVg6N20%2Fimg.png "result")
 
 ## 📥 Installation
 
