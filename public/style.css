@@ -38,7 +38,7 @@ body {
 }
 
 #projectTitle {
-  width: 260px;
+  width: 240px;
   font-size: 27px;
   font-weight: 600;
   padding: 36px 0 10px 0;
@@ -52,7 +52,7 @@ body {
   }
 }
 #control {
-  width: 260px;
+  width: 240px;
   display: flex;
   margin: 35px 0 20px 0;
   flex-direction: column;
@@ -65,11 +65,11 @@ body {
   }
 
   .bar label {
-    margin: 2px 15px 2px 0;
+    margin: 2px 6px 2px 0;
   }
 
   .bar input[type="range"] {
-    width: 160px;
+    width: 135px;
     -webkit-appearance: none;
     appearance: none;
     height: 1px;
@@ -96,7 +96,7 @@ body {
 }
 
 #mode {
-  width: 260px;
+  width: 240px;
   margin: 20px 0;
 
   .mode-buttons {
@@ -121,21 +121,20 @@ body {
 
 .warning {
   display: none;
-  width: 220px;
+  width: 240px;
   display: flex;
   color: #f59e0b;
   margin: 20px 0;
   .warning-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     text-align: start;
   }
   .warningBox {
     display: flex;
-    font-size: 14px;
+    font-size: 13px;
     flex-wrap: wrap;
-    color: #eeeeee;
-
+    font-weight: 300;
     .list {
       width: inherit;
       word-wrap: break-word;

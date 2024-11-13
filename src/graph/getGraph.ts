@@ -33,7 +33,7 @@ export function getGraph(
 
   const zoom = d3
     .zoom()
-    .scaleExtent([0.7, 25])
+    .scaleExtent([0.3, 25])
     .translateExtent([
       [-100, -100],
       [width + 90, height + 100],

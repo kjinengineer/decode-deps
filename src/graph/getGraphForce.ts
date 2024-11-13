@@ -3,7 +3,7 @@ const height = window.innerHeight;
 
 export function applyInitialCharge(d3, simulation) {
   simulation
-    .force("charge", d3.forceManyBody().strength(-100))
+    .force("charge", d3.forceManyBody().strength(-50))
     .alpha(1)
     .restart();
 
