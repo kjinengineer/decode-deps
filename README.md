@@ -2,10 +2,9 @@
 
 **DecodeDeps** is a dev-tool that analyzes and visualizes module dependencies in js, jsx, ts, tsx projects. It identifies modules using `import` and `require` statements and generates a graph to illustrate these relationships. By providing a visualization of module dependencies, it offers insights for building a more structured codebase.
 
-## 🚀 Last Update v.1.2.0 (November 13, 2024)
+## 🚀 Last Update v.1.2.2 (Feb 25, 2025)
 
-- Add functionality to distinguish and display **external** and **internal** modules
-- Update UI for the side menu
+- Bug Fix (Graph wasn't shown but now it's fixed)
 
 ## 🌟 Key Features
 
