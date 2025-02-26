@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DecodeDeps</title>
+    <link rel="icon" href="./logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="
+    https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js
+    "></script>
+  </head>
+  <body>
+    <div id="canvas">
+      <div id="side">
+        <div>
+          <div id="projectTitle"></div>
+          <div id="control">
+            <div class="side-title">Control</div>
+            <div class="bar">
+              <label for="nodeSize">Node Size</label>
+              <input
+                type="range"
+                id="nodeSize"
+                min="5"
+                max="50"
+                value='${localStorage.getItem("nodeSize") || 20}'
+              />
+            </div>
+            <div class="bar">
+              <label for="linkDistance">Link Distance</label>
+              <input
+                type="range"
+                id="linkDistance"
+                min="10"
+                max="200"
+                value='${localStorage.getItem("linkDistance") || 125}'
+              />
+            </div>
+            <div class="bar">
+              <label for="fontSize">Font Size</label>
+              <input
+                type="range"
+                id="fontSize"
+                min="8"
+                max="30"
+                value='${localStorage.getItem("fontSize") || 12}'
+              />
+            </div>
+          </div>
+          <div id="mode">
+            <div class="side-title">Dependency Type</div>
+            <div class="mode-buttons">
+              <div id="showAll" class="mode-button">All</div>
+              <div id="showInternal" class="mode-button">Internal</div>
+              <div id="showExternal" class="mode-button">External</div>
+            </div>
+          </div>
+          <div class="warning">
+            <div class="warning-title"></div>
+            <div class="warningBox"></div>
+          </div>
+        </div>
+        <div id="footer">
+          If you have any issue, please visit
+          <a target="_blank" href="https://github.com/kjinengineer/decode-deps"
+            >Github</a
+          >
+        </div>
+      </div>
+      <svg></svg>
+    </div>
+    <script type="module" src="./graph/index.js"></script>
+    <script type="module" src="./ui/warning.js"></script>
+  </body>
+</html>

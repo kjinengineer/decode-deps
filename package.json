@@ -1,6 +1,6 @@
 {
   "name": "decode-deps",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "type": "module",
   "scripts": {
     "dev": "tsx debug/index.ts",
@@ -12,22 +12,22 @@
     "decode-deps": "./bin/cli.js"
   },
   "dependencies": {
+    "d3": "^7.9.0",
     "express": "^4.21.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "cors": "^2.8.5",
-    "d3": "^7.9.0",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vite": "^5.4.11"
   },
   "author": {
-    "name": "jnoncode"
+    "name": "kjin"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jnoncode/decode-deps"
+    "url": "https://github.com/kjinengineer/decode-deps"
   },
   "homepage": "https://decode-deps.vercel.app",
   "license": "MIT",
